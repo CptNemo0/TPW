@@ -1,6 +1,6 @@
 # Concurrent programming
 
-## Working Group
+## MC PN14
 
 | Name Surname (initials) | GUID                                     |
 | ----------------------- | ---------------------------------------- |
