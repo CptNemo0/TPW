@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 
 namespace Model
 {
@@ -13,6 +14,8 @@ namespace Model
         public abstract int Position_Y { get; set; }
         public abstract int Radius { get; }
 
+        public abstract event PropertyChangedEventHandler? PropertyChanged;
 
+        public abstract void Update(Object s, PropertyChangedEventArgs e);
     }
 }
