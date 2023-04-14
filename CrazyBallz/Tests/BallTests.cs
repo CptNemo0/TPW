@@ -56,7 +56,7 @@ namespace Tests
             Assert.That(ball2.Position_X, Is.EqualTo(387));
             Assert.That(ball2.Position_Y, Is.EqualTo(387));
         }
-
+        
         [Test]
         public void StartMovemntTest()
         {
