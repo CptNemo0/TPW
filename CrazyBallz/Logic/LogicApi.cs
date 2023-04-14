@@ -27,5 +27,7 @@ namespace Logic
         public abstract List<IBall> GetBallRepositoryList();
 
         public abstract int GetRepositroyListSize();
+
+        public abstract void StartBallsMovement();
     }
 }
