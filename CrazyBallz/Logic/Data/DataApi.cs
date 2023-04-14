@@ -6,7 +6,7 @@ namespace Logic.Data
 {
     public abstract class DataApi
     {
-        public List<IBall> Balls { get; set; }
+        public abstract List<IBall>? Balls { get; }
         public static DataApi Instantiate()
         {
             return new BallRepository();

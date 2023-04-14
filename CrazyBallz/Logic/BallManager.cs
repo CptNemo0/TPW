@@ -9,15 +9,15 @@ namespace Logic
 {
     internal class BallManager : LogicApi
     {
-        private int BoardWidth;
+        private readonly int BoardWidth;
         private readonly int BoardHeight;
         private DataApi Repository;
 
-        public BallManager(int boardWidth, int boardHeight, DataApi repository) 
+        public BallManager(int boardWidth, int boardHeight) 
         {
             BoardWidth = boardWidth;
             BoardHeight = boardHeight;
-            Repository = repository;
+            Repository = DataApi.Instantiate();
         }
 
         public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
@@ -32,12 +32,12 @@ namespace Logic
 
         public override List<IBall> GetBallRepositoryList()
         {
-            throw new NotImplementedException();
+            return Repository.Balls;
         }
 
         public override void RemoveAllBalls()
         {
-            throw new NotImplementedException();
+            Repository.RemoveAllBalls();
         }
     }
 }

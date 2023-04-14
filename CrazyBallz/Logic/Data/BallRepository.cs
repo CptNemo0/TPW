@@ -10,7 +10,10 @@ namespace Logic.Data
     {
         private List<IBall> balls = new();
 
-        public List<IBall> Balls { get => balls; set => balls = value; }
+        public override List<IBall>? Balls 
+        { 
+            get => balls;  
+        }
 
         public override void AddBall(IBall ball)
         {

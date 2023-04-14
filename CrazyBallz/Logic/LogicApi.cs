@@ -9,11 +9,11 @@ namespace Logic
 {
     public abstract class LogicApi
     {
-        public DataApi? Repository;
+        public abstract DataApi? Repository;
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
         {
-            return new BallManager(boardHeight, boardWidth, DataApi.Instantiate());
+            return new BallManager(boardHeight, boardWidth);
         }
 
         public abstract IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed);
