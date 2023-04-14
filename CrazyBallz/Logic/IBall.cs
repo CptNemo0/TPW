@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Numerics;
 using System.Threading;
 
@@ -12,6 +13,8 @@ namespace Logic
         public abstract int Speed_X { get; set; }
         public abstract int Speed_Y { get; set; }
         public abstract Timer? Timer { get; set; }
+
+        public abstract event PropertyChangedEventHandler? PropertyChanged;
 
         public static IBall CreateBall(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y)
         {

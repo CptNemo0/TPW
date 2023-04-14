@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ using System.Windows.Automation.Provider;
 
 namespace Logic
 {
-    internal class Ball : IBall
+    internal class Ball : IBall, INotifyPropertyChanged
     {
         private int postion_X;
         private int postion_Y;
@@ -17,6 +19,8 @@ namespace Logic
         private int speed_X;
         private int speed_Y;
         private Timer? timer;
+
+        public override event PropertyChangedEventHandler? PropertyChanged;
 
         public override int Position_X 
         {
@@ -92,6 +96,11 @@ namespace Logic
         public override void StartMovement(Board board)
         {
             Timer = new Timer(Move, board, 0, 16);
+        }
+
+        private void ProperyChangeCall([CallerMemberName] string?  callerProperty = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(callerProperty));
         }
     }
 }
