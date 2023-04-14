@@ -19,6 +19,7 @@ namespace Logic
         private int speed_X;
         private int speed_Y;
         private Timer? timer;
+        private Vector2 boardSize;
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
@@ -47,6 +48,7 @@ namespace Logic
             set=> speed_Y = value;
         }
         public override Timer? Timer { get => timer; set => timer = value; }
+        public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
 
         public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y)
         {
@@ -72,15 +74,14 @@ namespace Logic
             if (obj == null) throw new ArgumentNullException("object is null");
             if (obj is Vector2) 
             {
-                Vector2 vector = (Vector2)obj;
-                float boardWidth = vector[0];
-                float boardHeight = vector[1];
+                float boardWidth = boardSize[0];
+                float boardHeight = boardSize[1];
 
-                if (Position_X + Speed_X >= boardWidth - radius)
+                if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
                 {
                     ChangeXdirection();
                 }
-                if (Position_Y + Speed_Y >= boardHeight - radius)
+                if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
                 {
                     ChangeYdirection();
                 }
@@ -95,6 +96,7 @@ namespace Logic
 
         public override void StartMovement(Vector2 vector)
         {
+            boardSize = vector;
             Timer = new Timer(Move, vector, 0, 16);
         }
 

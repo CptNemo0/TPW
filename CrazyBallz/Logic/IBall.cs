@@ -13,6 +13,7 @@ namespace Logic
         public abstract int Speed_X { get; set; }
         public abstract int Speed_Y { get; set; }
         public abstract Timer? Timer { get; set; }
+        public abstract Vector2 BoardSize { get; set; }
 
         public abstract event PropertyChangedEventHandler? PropertyChanged;
 
