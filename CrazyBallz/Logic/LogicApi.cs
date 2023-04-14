@@ -8,9 +8,6 @@ namespace Logic
 {
     public abstract class LogicApi
     {
-        public static LogicApi Instantiate(int boardHeight, int boardWidth)
-        {
 
-        }
     }
 }
