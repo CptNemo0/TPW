@@ -70,11 +70,11 @@ namespace Logic
         public override void Move(object? obj)
         {
             if (obj == null) throw new ArgumentNullException("object is null");
-            if (obj is Board) 
+            if (obj is Vector2) 
             {
-                Board board = (Board)obj;
-                int boardWidth = board.Width;
-                int boardHeight = board.Height;
+                Vector2 vector = (Vector2)obj;
+                float boardWidth = vector[0];
+                float boardHeight = vector[1];
 
                 if (Position_X + Speed_X >= boardWidth - radius)
                 {
@@ -93,9 +93,9 @@ namespace Logic
             }
         }
 
-        public override void StartMovement(Board board)
+        public override void StartMovement(Vector2 vector)
         {
-            Timer = new Timer(Move, board, 0, 16);
+            Timer = new Timer(Move, vector, 0, 16);
         }
 
         private void ProperyChangeCall([CallerMemberName] string?  callerProperty = null)

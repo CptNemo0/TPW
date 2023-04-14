@@ -24,6 +24,6 @@ namespace Logic
         public abstract void ChangeXdirection();
         public abstract void ChangeYdirection();
         public abstract void Move(object? obj);
-        public abstract void StartMovement(Board board);
+        public abstract void StartMovement(Vector2 vetor);
     }
 }

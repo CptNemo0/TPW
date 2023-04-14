@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Logic.Data;
@@ -73,10 +74,10 @@ namespace Logic
 
         public override void StartBallsMovement()
         {
-            Board board = new Board(boardWidth, boardHeight);
+            Vector2 vector = new Vector2(boardWidth, boardHeight);
             for (int i = 0; i< GetRepositroyListSize(); i++)
             {
-                GetBallRepositoryList()[i].StartMovement(board); 
+                GetBallRepositoryList()[i].StartMovement(vector); 
             }
         }
     }
