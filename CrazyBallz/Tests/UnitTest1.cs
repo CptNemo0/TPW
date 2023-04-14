@@ -1,3 +1,5 @@
+using Logic;
+
 namespace Tests
 {
     public class Tests
