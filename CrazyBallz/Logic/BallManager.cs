@@ -9,27 +9,51 @@ namespace Logic
 {
     internal class BallManager : LogicApi
     {
-        private readonly int BoardWidth;
-        private readonly int BoardHeight;
+        private readonly int boardWidth;
+        private readonly int boardHeight;
         private DataApi repository;
 
         public override DataApi? Repository { get => repository; set => repository = value; }
 
-        public BallManager(int boardWidth, int boardHeight) 
+        public override int BoardWitdth => boardWidth;
+
+        public override int BoardHeight => boardHeight;
+
+        public BallManager(int width, int height) 
         {
-            BoardWidth = boardWidth;
-            BoardHeight = boardHeight;
+            boardWidth = width;
+            boardHeight = height;
             Repository = DataApi.Instantiate();
         }
 
         public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
         {
-            throw new NotImplementedException();
+            if 
+            (
+                x > boardWidth - radius || xSpeed > boardWidth - radius || xSpeed < -1 * boardWidth + radius || 
+                y > boardHeight - radius || ySpeed > boardHeight - radius || ySpeed < -1 * boardHeight + radius
+            )
+            {
+                throw new ArgumentException("Ball was exceeding board range");
+            }
+
+            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed);
+            Repository.AddBall(ball);
+            return ball;
         }
 
         public override IBall CreateBallAtRandomCoordinates()
         {
-            throw new NotImplementedException();
+            Random r = new();
+            int maxRadius = 5;
+            int maxSpeed = 3;
+            return CreateBall(
+                r.Next(maxRadius, boardWidth - maxRadius), 
+                r.Next(maxRadius, boardHeight - maxRadius),
+                r.Next(1, maxRadius), 
+                r.Next(-maxSpeed, maxSpeed), 
+                r.Next(-maxSpeed, maxSpeed)
+            );
         }
 
         public override List<IBall> GetBallRepositoryList()
@@ -40,6 +64,11 @@ namespace Logic
         public override void RemoveAllBalls()
         {
             Repository.RemoveAllBalls();
+        }
+
+        public override int GetRepositroyListSize()
+        {
+            return Repository.GetAmountOfBalls();
         }
     }
 }

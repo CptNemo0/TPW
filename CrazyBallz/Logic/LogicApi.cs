@@ -10,6 +10,8 @@ namespace Logic
     public abstract class LogicApi
     {
         public abstract DataApi? Repository { get; set; }
+        public abstract int BoardWitdth { get; }
+        public abstract int BoardHeight { get; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
         {
@@ -23,5 +25,7 @@ namespace Logic
         public abstract void RemoveAllBalls();
 
         public abstract List<IBall> GetBallRepositoryList();
+
+        public abstract int GetRepositroyListSize();
     }
 }
