@@ -99,7 +99,7 @@ namespace Logic
             boardSize = vector;
             Timer = new Timer(Move, vector, 0, 16);
         }
-
+            
         private void ProperyChangeCall([CallerMemberName] string?  callerProperty = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(callerProperty));
