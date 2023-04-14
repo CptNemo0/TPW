@@ -29,5 +29,7 @@ namespace Logic
         public abstract int GetRepositroyListSize();
 
         public abstract void StartBallsMovement();
+
+        public abstract void StopBallsMovement();
     }
 }

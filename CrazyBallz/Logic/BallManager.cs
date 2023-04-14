@@ -80,5 +80,16 @@ namespace Logic
                 GetBallRepositoryList()[i].StartMovement(vector); 
             }
         }
+
+        public override void StopBallsMovement()
+        {
+            for (int i = 0; i < GetRepositroyListSize(); i++)
+            {
+                if (GetBallRepositoryList()[i].Timer != null)
+                {
+                    GetBallRepositoryList()[i].Timer.Dispose();
+                }
+            }
+        }
     }
 }
