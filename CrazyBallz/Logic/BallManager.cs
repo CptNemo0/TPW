@@ -11,7 +11,9 @@ namespace Logic
     {
         private readonly int BoardWidth;
         private readonly int BoardHeight;
-        private DataApi Repository;
+        private DataApi repository;
+
+        public override DataApi? Repository { get => repository; set => repository = value; }
 
         public BallManager(int boardWidth, int boardHeight) 
         {

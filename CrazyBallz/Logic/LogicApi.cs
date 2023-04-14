@@ -9,7 +9,7 @@ namespace Logic
 {
     public abstract class LogicApi
     {
-        public abstract DataApi? Repository;
+        public abstract DataApi? Repository { get; set; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
         {
