@@ -70,5 +70,14 @@ namespace Logic
         {
             return Repository.GetAmountOfBalls();
         }
+
+        public override void StartBallsMovement()
+        {
+            Board board = new Board(boardWidth, boardHeight);
+            for (int i = 0; i< GetRepositroyListSize(); i++)
+            {
+                GetBallRepositoryList()[i].StartMovement(board); 
+            }
+        }
     }
 }
