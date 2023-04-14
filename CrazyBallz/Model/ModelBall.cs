@@ -22,8 +22,8 @@ namespace Model
             this.radius = radius;
         }
 
-        public override int Position_X { get => position_x; set => position_x = value; }
-        public override int Position_Y { get => position_y; set => position_y = value; }
+        public override int Position_X { get => position_x; set { position_x = value;  ProperyChangeCall(); } }
+        public override int Position_Y { get => position_y; set { position_y = value; ProperyChangeCall(); } }
         public override int Radius => radius;
 
         public override event PropertyChangedEventHandler? PropertyChanged;

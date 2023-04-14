@@ -26,12 +26,12 @@ namespace Logic
         public override int Position_X 
         {
             get => postion_X;
-            set => postion_X = value;
+            set { postion_X = value; ProperyChangeCall(); }
         }
         public override int Position_Y 
         {
             get => postion_Y;
-            set => postion_Y = value;
+            set { postion_Y = value; ProperyChangeCall(); }
         }
         public override int Radius
         {
@@ -40,12 +40,12 @@ namespace Logic
         public override int Speed_X 
         {
             get => speed_X;
-            set => speed_X = value;
+            set { speed_X = value; ProperyChangeCall(); }
         }
         public override int Speed_Y
         {
             get => speed_Y;
-            set=> speed_Y = value;
+            set { speed_Y = value; ProperyChangeCall(); }
         }
         public override Timer? Timer { get => timer; set => timer = value; }
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
