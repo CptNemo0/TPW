@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CrazyBalls" Height="480
+        " Width="530" Background="#afaba2">
     <Grid>
+        <Rectangle Margin="40,40,90,40" Stroke="Black"/>
+        <Button Content="Start" Margin="467,40,25,0" VerticalAlignment="Top" Background="#e9e1d3"/>
+        <Button Content="Reset" Margin="467,95,25,0" VerticalAlignment="Top" Background="#e9e1d3"/>
+        <Label Content="Ilość kul" HorizontalAlignment="Left" Margin="442,64,0,0" VerticalAlignment="Top" Width="54"/>
+        <TextBox HorizontalAlignment="Left" Margin="496,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="32"/>
 
     </Grid>
 </Window>
