@@ -47,9 +47,9 @@ namespace Model
             }
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string? callerProperty = null)
+        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(callerProperty));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

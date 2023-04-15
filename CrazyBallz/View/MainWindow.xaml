@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         Title="CrazyBalls" Height="480
         " Width="530" Background="#afaba2">
+    <Window.DataContext>
+        <vm:ViewMdl/>
+    </Window.DataContext>
     <Grid>
         <Rectangle Margin="40,40,90,40" Stroke="Black"/>
         <Button Content="Start" Margin="467,40,25,0" VerticalAlignment="Top" Background="#e9e1d3"/>
