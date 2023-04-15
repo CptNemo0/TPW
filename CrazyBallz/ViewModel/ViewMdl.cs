@@ -16,7 +16,7 @@ namespace ViewModel
         private Commando commandReset;
         private ModelApi modelApi;
         private bool swtch = true;
-        private string ballz = "";
+        private string ballz = string.Empty;
 
         public Commando CommandStart { get => commandStart; set => commandStart = value; }
         public Commando CommandReset { get => commandReset; set => commandReset = value; }
@@ -41,15 +41,17 @@ namespace ViewModel
 
         private void Start()
         {
-            int amount = int.Parse(Ballz);
-            if(amount > 0) 
+            if(Ballz.Length > 0)
             {
-                modelApi.NewRandomBalls(amount);
-                NotifyPropertyChanged(nameof(ModelBalls));
-                modelApi.StartBallsMovement();
-                SwitchSwtch();
+                int amount = int.Parse(Ballz);
+                if (amount > 0)
+                {
+                    modelApi.NewRandomBalls(amount);
+                    NotifyPropertyChanged(nameof(ModelBalls));
+                    modelApi.StartBallsMovement();
+                    SwitchSwtch();
+                }
             }
-            
         }
 
 

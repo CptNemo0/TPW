@@ -48,12 +48,19 @@ namespace Logic
             Random r = new();
             int radius = 10;
             int maxSpeed = 3;
+            int[] speeds = { -3, -2, -1, 0, 1, 2, 3 };
+            int xSpeed = r.Next(0, 7);
+            int ySpeed = r.Next(0, 7);
+            if(ySpeed == 3 && xSpeed == 3)
+            {
+                ySpeed++;
+            }
             return CreateBall(
                 r.Next(radius, boardWidth - radius), 
                 r.Next(radius, boardHeight - radius),
-                radius, 
-                r.Next(-maxSpeed, maxSpeed), 
-                r.Next(-maxSpeed, maxSpeed)
+                radius,
+                speeds[xSpeed],
+                speeds[ySpeed]
             );
         }
 
