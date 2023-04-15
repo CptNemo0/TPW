@@ -14,9 +14,8 @@ namespace ViewModel
     {
         private Commando commandStart;
         private Commando commandReset;
-        private Commando sliderValueChangedCommand;
         private ModelApi modelApi;
-        private bool swtch;
+        private bool swtch = true;
         private string ballz = "";
 
         public Commando CommandStart { get => commandStart; set => commandStart = value; }
@@ -29,12 +28,11 @@ namespace ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ViewMdl() 
+        public ViewMdl(ModelApi modelApi) 
         {
             CommandStart = new Commando(Start, StartReady);
             CommandReset = new Commando(Reset, ResetReady);
-            ModelApi = ModelApi.Instantiate();
-            Swtch = true;
+            this.modelApi = modelApi;
         }
 
         private void Start()
