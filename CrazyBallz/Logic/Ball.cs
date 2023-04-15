@@ -26,12 +26,12 @@ namespace Logic
         public override int Position_X 
         {
             get => postion_X;
-            set { postion_X = value; ProperyChangeCall(); }
+            set { postion_X = value; NotifyPropertyChanged(); }
         }
         public override int Position_Y 
         {
             get => postion_Y;
-            set { postion_Y = value; ProperyChangeCall(); }
+            set { postion_Y = value; NotifyPropertyChanged(); }
         }
         public override int Radius
         {
@@ -40,12 +40,12 @@ namespace Logic
         public override int Speed_X 
         {
             get => speed_X;
-            set { speed_X = value; ProperyChangeCall(); }
+            set { speed_X = value; NotifyPropertyChanged(); }
         }
         public override int Speed_Y
         {
             get => speed_Y;
-            set { speed_Y = value; ProperyChangeCall(); }
+            set { speed_Y = value; NotifyPropertyChanged(); }
         }
         public override Timer? Timer { get => timer; set => timer = value; }
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
@@ -99,10 +99,10 @@ namespace Logic
             boardSize = vector;
             Timer = new Timer(Move, vector, 0, 16);
         }
-            
-        private void ProperyChangeCall([CallerMemberName] string?  callerProperty = null)
+
+        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(callerProperty));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
