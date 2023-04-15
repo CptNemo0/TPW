@@ -51,9 +51,9 @@ namespace ViewModel
 
         private void Reset() 
         {
+            modelApi.StopBallsMovement();
             modelApi.RemoveAllBalls();
             NotifyPropertyChanged(nameof(ModelBalls));
-            modelApi.StopBallsMovement();
             SwitchSwtch();
         }
 
