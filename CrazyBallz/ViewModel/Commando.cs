@@ -31,10 +31,10 @@ namespace ViewModel
 
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            method();
         }
 
-        internal void RaiseCanExecuteChanged()
+        internal void NotifyCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
