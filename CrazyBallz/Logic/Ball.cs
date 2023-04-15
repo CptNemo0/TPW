@@ -87,7 +87,6 @@ namespace Logic
                 }
                 Position_X += Speed_X;
                 Position_Y += Speed_Y;
-                Console.WriteLine(Position_X.ToString() + ", " + Position_Y.ToString());
             }
             else
             {
