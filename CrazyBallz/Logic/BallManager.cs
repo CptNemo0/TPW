@@ -46,12 +46,12 @@ namespace Logic
         public override IBall CreateBallAtRandomCoordinates()
         {
             Random r = new();
-            int maxRadius = 5;
+            int radius = 10;
             int maxSpeed = 3;
             return CreateBall(
-                r.Next(maxRadius, boardWidth - maxRadius), 
-                r.Next(maxRadius, boardHeight - maxRadius),
-                r.Next(1, maxRadius), 
+                r.Next(radius, boardWidth - radius), 
+                r.Next(radius, boardHeight - radius),
+                radius, 
                 r.Next(-maxSpeed, maxSpeed), 
                 r.Next(-maxSpeed, maxSpeed)
             );

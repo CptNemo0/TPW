@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class ModelBall : IModelBall
+    internal class ModelBall : IModelBall, INotifyPropertyChanged
     {
         private int position_x;
         private int position_y;
