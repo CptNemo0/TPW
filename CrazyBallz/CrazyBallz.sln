@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "View\View.csproj", "{AD3C2D18-D2AC-4D82-A005-838DC4F14449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DC76867E-8AD3-4EF1-B175-281C1CAC8460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{DC76867E-8AD3-4EF1-B175-281C1CAC8460}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A809A3BB-D4E4-423B-A06A-96479775E25F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A5F7B92-C104-4059-AE8A-60F5919001BC} = {A809A3BB-D4E4-423B-A06A-96479775E25F}
+		{6A9AE368-F2E0-4863-B07F-1B5555BA64E6} = {A809A3BB-D4E4-423B-A06A-96479775E25F}
+		{AD3C2D18-D2AC-4D82-A005-838DC4F14449} = {A809A3BB-D4E4-423B-A06A-96479775E25F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0ABC2799-F3B4-4380-B5C1-B61DC58A3692}

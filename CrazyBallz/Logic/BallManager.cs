@@ -47,7 +47,6 @@ namespace Logic
         {
             Random r = new();
             int radius = 10;
-            int maxSpeed = 3;
             int[] speeds = { -3, -2, -1, 0, 1, 2, 3 };
             int xSpeed = r.Next(0, 7);
             int ySpeed = r.Next(0, 7);

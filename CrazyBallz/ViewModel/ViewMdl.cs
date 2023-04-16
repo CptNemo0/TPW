@@ -28,15 +28,17 @@ namespace ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /*
         public ViewMdl() : this(ModelApi.Instantiate())
         {
         }
+        */
 
-        public ViewMdl(ModelApi modelApi) 
+        public ViewMdl() 
         {
             CommandStart = new Commando(Start, StartReady);
             CommandReset = new Commando(Reset, ResetReady);
-            this.modelApi = modelApi;
+            modelApi = ModelApi.Instantiate();
         }
 
         private void Start()
