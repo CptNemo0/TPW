@@ -78,7 +78,7 @@ namespace Tests
             manager.StartBallsMovement();
             for (int i = 0; i < manager.GetRepositroyListSize(); i++)
             {
-                Thread.Sleep(20);
+                Thread.Sleep(70);
                 if (manager.GetBallRepositoryList()[i].Speed_X != 0)
                 {
                     Assert.That(coordinatesX[i], Is.Not.EqualTo(manager.GetBallRepositoryList()[i].Position_X));

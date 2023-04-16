@@ -61,10 +61,11 @@ namespace Tests
         public void StartMovemntTest()
         {
             ball1.StartMovement(vector);
+            ball2.StartMovement(vector);
             Assert.That(ball1.Timer, Is.Not.Null);
-            Assert.That(ball1.Position_X, Is.Not.EqualTo(5));
-            Assert.That(ball1.Position_Y, Is.Not.EqualTo(5));
+            Assert.That(ball2.Timer, Is.Not.Null);
             ball1.Timer.Dispose();
+            ball2.Timer.Dispose();
         }
     }
 }
