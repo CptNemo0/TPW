@@ -13,19 +13,23 @@ namespace Logic
         public abstract int Speed_X { get; set; }
         public abstract int Speed_Y { get; set; }
         public abstract int Mass { get; set; }
-        public abstract Timer? Timer { get; set; }
-        public abstract Vector2 BoardSize { get; set; }
+        public abstract int Id { get; set; }
+        //public abstract Timer? Timer { get; set; }
+        //public abstract Vector2 BoardSize { get; set; }
+        //public abstract bool IsMoving { get; set; }
 
         public abstract event PropertyChangedEventHandler? PropertyChanged;
 
-        public static IBall CreateBall(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass)
+        public static IBall CreateBall(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass, int id)
         {
-            return new Ball(postion_X, postion_Y, radius, speed_X, speed_Y, mass);
+            return new Ball(postion_X, postion_Y, radius, speed_X, speed_Y, mass, id);
         }
 
         public abstract void ChangeXdirection();
         public abstract void ChangeYdirection();
+        /*
         public abstract void Move(object? obj);
         public abstract void StartMovement(Vector2 vector);
+        */
     }
 }

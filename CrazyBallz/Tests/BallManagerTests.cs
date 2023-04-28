@@ -13,7 +13,7 @@ namespace Tests
         [SetUp]
         public void SetUp() 
         {
-            manager = LogicApi.Instantiate(400, 400);
+            manager = LogicApi.Instantiate(400, 400, 5);
         }
 
         [Test] 
@@ -30,7 +30,7 @@ namespace Tests
         {
             Assert.That(manager.GetBallRepositoryList(), Is.Not.Null);
             Assert.That(manager.GetRepositroyListSize(), Is.EqualTo(0));
-            IBall ball = IBall.CreateBall(5, 5, 5, 1, 1);
+            IBall ball = IBall.CreateBall(5, 5, 5, 1, 1, 1, 0);
             manager.GetBallRepositoryList().Add(ball);
             Assert.That(manager.GetRepositroyListSize(), Is.EqualTo(1));
         }
@@ -38,7 +38,7 @@ namespace Tests
         [Test]
         public void CreateBallTest()
         {
-            manager.CreateBall(5, 5, 5, 1, 1);
+            manager.CreateBall(5, 5, 5, 1, 1, 0);
             Assert.That(manager.GetRepositroyListSize(), Is.EqualTo(1));
             for (int i = 0; i < 10000;  i++)
             {

@@ -14,6 +14,8 @@ namespace Logic
         private readonly int boardHeight;
         private DataApi repository;
         private int radius;
+        private List<Mover> moverList = new List<Mover>();
+        private List<Task> moverTasks = new List<Task>();
 
         public override DataApi? Repository { get => repository; set => repository = value; }
 
@@ -31,7 +33,7 @@ namespace Logic
             Repository = DataApi.Instantiate();
         }
 
-        public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
+        public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass )
         {
             if 
             (
@@ -42,8 +44,12 @@ namespace Logic
                 throw new ArgumentException("Ball was exceeding board range");
             }
 
-            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass);
-            Repository.AddBall(ball);
+            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass, repository.GetAmountOfBalls());
+            repository.AddBall(ball);
+
+            Vector2 boardsize = new Vector2(boardWidth, boardHeight);
+            Mover mover = new Mover(ball, boardsize);
+            moverList.Add(mover);
             return ball;
         }
 
@@ -85,22 +91,25 @@ namespace Logic
 
         public override void StartBallsMovement()
         {
-            Vector2 vector = new Vector2(boardWidth, boardHeight);
-            for (int i = 0; i< GetRepositroyListSize(); i++)
+            foreach (Mover mover in moverList)
             {
-                GetBallRepositoryList()[i].StartMovement(vector); 
+                Task moveTask = Task.Run(() => mover.MoveContinously());
+                moverTasks.Add(moveTask);
             }
         }
 
         public override void StopBallsMovement()
         {
-            for (int i = 0; i < GetRepositroyListSize(); i++)
+            foreach (Mover mover in moverList)
             {
-                if (GetBallRepositoryList()[i].Timer != null)
-                {
-                    GetBallRepositoryList()[i].Timer.Dispose();
-                }
+                mover.Stop();
             }
+
+            foreach (Task moveTask in moverTasks)
+            {
+                moveTask.Wait(); // wait for the task to complete
+            }
+            moverTasks.Clear();
         }
     }
 }

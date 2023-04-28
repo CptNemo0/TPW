@@ -19,8 +19,9 @@ namespace Logic
         private int speed_X;
         private int speed_Y;
         private Timer? timer;
-        private Vector2 boardSize;
+        //private Vector2 boardSize;
         private int mass;
+        private int id;
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
@@ -53,11 +54,11 @@ namespace Logic
             get => mass;
             set { mass = value; NotifyPropertyChanged(); }
         }
+        public override int Id { get => id; set => id = value; }
+        //public override Timer? Timer { get => timer; set => timer = value; }
+        //public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
 
-        public override Timer? Timer { get => timer; set => timer = value; }
-        public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
-
-        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass)
+        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass, int id)
         {
             this.postion_X = postion_X;
             this.postion_Y = postion_Y;
@@ -65,6 +66,7 @@ namespace Logic
             this.speed_X = speed_X;
             this.speed_Y = speed_Y;
             this.mass = mass;
+            this.id = id;
         }
 
         public override void ChangeXdirection()
@@ -76,30 +78,40 @@ namespace Logic
         {
             Speed_Y *= -1;
         }
-
+        /*
         public override void Move(object? obj)
         {
-            if (obj == null) throw new ArgumentNullException("object is null");
-            if (obj is Vector2) 
+            Task.Run(() =>
             {
-                float boardWidth = boardSize[0];
-                float boardHeight = boardSize[1];
+                while(_isMoving) 
+                {
+                    lock(lockObject)
+                    {
+                        if (obj == null) throw new ArgumentNullException("object is null");
+                        if (obj is Vector2)
+                        {
+                            float boardWidth = boardSize[0];
+                            float boardHeight = boardSize[1];
 
-                if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
-                {
-                    ChangeXdirection();
+                            if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
+                            {
+                                ChangeXdirection();
+                            }
+                            if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
+                            {
+                                ChangeYdirection();
+                            }
+                            Position_X += Speed_X;
+                            Position_Y += Speed_Y;
+                        }
+                        else
+                        {
+                            throw new ArgumentException("object was not a board class");
+                        }
+                    }
+                    Thread.Sleep(16);
                 }
-                if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
-                {
-                    ChangeYdirection();
-                }
-                Position_X += Speed_X;
-                Position_Y += Speed_Y;
-            }
-            else
-            {
-                throw new ArgumentException("object was not a board class");
-            }
+            });
         }
 
         public override void StartMovement(Vector2 vector)
@@ -107,7 +119,7 @@ namespace Logic
             boardSize = vector;
             Timer = new Timer(Move, vector, 0, 16);
         }
-
+        */
         private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
