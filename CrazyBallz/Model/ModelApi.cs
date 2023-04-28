@@ -12,7 +12,7 @@ namespace Model
     {
         public static ModelApi Instantiate()
         {
-            return new ModelManager(LogicApi.Instantiate(1400, 700));
+            return new ModelManager(LogicApi.Instantiate(1400, 700, 10));
         }
         public abstract void StartBallsMovement();
         public abstract void StopBallsMovement();

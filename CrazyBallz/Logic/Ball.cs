@@ -20,6 +20,7 @@ namespace Logic
         private int speed_Y;
         private Timer? timer;
         private Vector2 boardSize;
+        private int mass;
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
@@ -47,16 +48,23 @@ namespace Logic
             get => speed_Y;
             set { speed_Y = value; NotifyPropertyChanged(); }
         }
+        public override int Mass
+        {
+            get => mass;
+            set { mass = value; NotifyPropertyChanged(); }
+        }
+
         public override Timer? Timer { get => timer; set => timer = value; }
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
 
-        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y)
+        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass)
         {
             this.postion_X = postion_X;
             this.postion_Y = postion_Y;
             this.radius = radius;
             this.speed_X = speed_X;
             this.speed_Y = speed_Y;
+            this.mass = mass;
         }
 
         public override void ChangeXdirection()

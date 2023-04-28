@@ -13,12 +13,12 @@ namespace Logic
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
 
-        public static LogicApi Instantiate(int boardHeight, int boardWidth)
+        public static LogicApi Instantiate(int boardHeight, int boardWidth, int radius)
         {
-            return new BallManager(boardHeight, boardWidth);
+            return new BallManager(boardHeight, boardWidth, radius);
         }
 
-        public abstract IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed);
+        public abstract IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass);
 
         public abstract IBall CreateBallAtRandomCoordinates();
 

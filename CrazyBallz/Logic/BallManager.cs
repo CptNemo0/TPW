@@ -13,6 +13,7 @@ namespace Logic
         private readonly int boardWidth;
         private readonly int boardHeight;
         private DataApi repository;
+        private int radius;
 
         public override DataApi? Repository { get => repository; set => repository = value; }
 
@@ -20,14 +21,17 @@ namespace Logic
 
         public override int BoardHeight => boardHeight;
 
-        public BallManager(int width, int height) 
+        public int Radius { get => radius; }
+
+        public BallManager(int width, int height, int radius) 
         {
-            boardWidth = width;
-            boardHeight = height;
+            this.boardWidth = width;
+            this.boardHeight = height;
+            this.radius = radius;
             Repository = DataApi.Instantiate();
         }
 
-        public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
+        public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
         {
             if 
             (
@@ -38,7 +42,7 @@ namespace Logic
                 throw new ArgumentException("Ball was exceeding board range");
             }
 
-            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed);
+            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass);
             Repository.AddBall(ball);
             return ball;
         }
@@ -46,20 +50,21 @@ namespace Logic
         public override IBall CreateBallAtRandomCoordinates()
         {
             Random r = new();
-            int radius = 10;
             int[] speeds = { -3, -2, -1, 0, 1, 2, 3 };
             int xSpeed = r.Next(0, 7);
             int ySpeed = r.Next(0, 7);
+            int mass   = r.Next(1, 11);
             if(ySpeed == 3 && xSpeed == 3)
             {
                 ySpeed++;
             }
             return CreateBall(
-                r.Next(radius, boardWidth - radius), 
-                r.Next(radius, boardHeight - radius),
-                radius,
+                r.Next(this.radius, boardWidth - this.radius), 
+                r.Next(this.radius, boardHeight - this.radius),
+                this.radius,
                 speeds[xSpeed],
-                speeds[ySpeed]
+                speeds[ySpeed],
+                mass
             );
         }
 
