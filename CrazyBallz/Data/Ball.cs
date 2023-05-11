@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Automation.Provider;
+
 
 namespace Logic
 {
@@ -23,12 +17,12 @@ namespace Logic
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
-        public override int Position_X 
+        public override int Position_X
         {
             get => postion_X;
             set { postion_X = value; NotifyPropertyChanged(); }
         }
-        public override int Position_Y 
+        public override int Position_Y
         {
             get => postion_Y;
             set { postion_Y = value; NotifyPropertyChanged(); }
@@ -37,7 +31,7 @@ namespace Logic
         {
             get => radius;
         }
-        public override int Speed_X 
+        public override int Speed_X
         {
             get => speed_X;
             set { speed_X = value; NotifyPropertyChanged(); }
@@ -72,7 +66,7 @@ namespace Logic
         public override void Move(object? obj)
         {
             if (obj == null) throw new ArgumentNullException("object is null");
-            if (obj is Vector2) 
+            if (obj is Vector2)
             {
                 float boardWidth = boardSize[0];
                 float boardHeight = boardSize[1];

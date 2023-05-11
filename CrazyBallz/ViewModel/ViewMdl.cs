@@ -24,6 +24,7 @@ namespace ViewModel
         public bool Swtch { get => swtch; set { swtch = value; NotifyPropertyChanged(); } }
         public string Ballz { get => ballz; set { ballz = value; NotifyPropertyChanged(); }
 }
+        
         public ObservableCollection<IModelBall> ModelBalls => modelApi.ReloadResub();
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -55,7 +56,6 @@ namespace ViewModel
                 }
             }
         }
-
 
         private void Reset() 
         {
