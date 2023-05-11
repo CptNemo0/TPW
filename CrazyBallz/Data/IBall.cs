@@ -12,6 +12,8 @@ namespace Logic
         public abstract int Radius { get; }
         public abstract int Speed_X { get; set; }
         public abstract int Speed_Y { get; set; }
+        public abstract int Stop_X { get; set; }
+        public abstract int Stop_Y { get; set; }
         public abstract Timer? Timer { get; set; }
         public abstract Vector2 BoardSize { get; set; }
 
@@ -26,5 +28,7 @@ namespace Logic
         public abstract void ChangeYdirection();
         public abstract void Move(object? obj);
         public abstract void StartMovement(Vector2 vector);
+        public abstract void BallStop();
+        public abstract void BallGo();
     }
 }

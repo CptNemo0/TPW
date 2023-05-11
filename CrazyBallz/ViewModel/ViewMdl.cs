@@ -28,13 +28,7 @@ namespace ViewModel
         public ObservableCollection<IModelBall> ModelBalls => modelApi.ReloadResub();
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /*
-        public ViewMdl() : this(ModelApi.Instantiate())
-        {
-        }
-        */
-
+    
         public ViewMdl() 
         {
             CommandStart = new Commando(Start, StartReady);
