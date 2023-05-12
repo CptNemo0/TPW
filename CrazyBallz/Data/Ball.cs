@@ -120,7 +120,7 @@ namespace Logic
             Speed_Y *= -1;
         }
 
-        public override void Move(object? obj)
+        public override void Move()
         {
             float boardWidth = boardSize[0];
             float boardHeight = boardSize[1];

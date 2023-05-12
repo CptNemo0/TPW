@@ -105,7 +105,7 @@ namespace Logic
             foreach (IBall ball in GetBallRepositoryList())
             {
                 await Task.Run(() => {
-                    ball.Move(vector);
+                    ball.Move();
                 });
             }
         }
@@ -129,10 +129,17 @@ namespace Logic
                             {
                                 int x = GetBallRepositoryList()[i].Speed_X;
                                 int y = GetBallRepositoryList()[i].Speed_Y;
+                                GetBallRepositoryList()[i].ChangeXdirection();
+                                GetBallRepositoryList()[i].ChangeYdirection();
+                                GetBallRepositoryList()[i].Move();
                                 GetBallRepositoryList()[i].Speed_X = GetBallRepositoryList()[j].Speed_X;
                                 GetBallRepositoryList()[i].Speed_Y = GetBallRepositoryList()[j].Speed_Y;
+                                GetBallRepositoryList()[j].ChangeXdirection();
+                                GetBallRepositoryList()[j].ChangeYdirection();
+                                GetBallRepositoryList()[j].Move();
                                 GetBallRepositoryList()[j].Speed_X = x;
                                 GetBallRepositoryList()[j].Speed_X = y;
+                                
                             }
                         }
                     }
