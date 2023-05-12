@@ -31,7 +31,7 @@ namespace Logic
             Repository = DataApi.Instantiate();
         }
 
-        public override IBall CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
+        public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
         {
             if 
             (
@@ -43,11 +43,19 @@ namespace Logic
             }
 
             IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed);
-            Repository.AddBall(ball);
-            return ball;
+            bool addable = true;
+            foreach (IBall ballFromList in GetBallRepositoryList())
+            {
+                if (CalcDistance(ball, ballFromList) <= radius*2) { addable = false; break; }
+            }
+            if (addable)
+            {
+                Repository.AddBall(ball);
+            }
+            return addable;
         }
 
-        public override IBall CreateBallAtRandomCoordinates()
+        public override bool CreateBallAtRandomCoordinates()
         {
             Random r = new();
 

@@ -17,7 +17,7 @@ namespace Model
         public abstract void StartBallsMovement();
         public abstract void StopBallsMovement();
         public abstract ObservableCollection<IModelBall> ReloadResub();
-        public abstract void CreateBallAtRandomCoordinates();
+        public abstract bool CreateBallAtRandomCoordinates();
         public abstract void NewRandomBalls(int n);
         public abstract void RemoveAllBalls();
     }

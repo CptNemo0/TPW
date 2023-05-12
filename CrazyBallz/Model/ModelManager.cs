@@ -23,16 +23,19 @@ namespace Model
             logicApi.RemoveAllBalls();
         }
 
-        public override void CreateBallAtRandomCoordinates()
+        public override bool CreateBallAtRandomCoordinates()
         {
-            logicApi.CreateBallAtRandomCoordinates();
+            return logicApi.CreateBallAtRandomCoordinates();
         }
 
         public override void NewRandomBalls(int n)
         {
-            for(int i = 0; i < n; i++)
+            while (n > 0)
             {
-                logicApi.CreateBallAtRandomCoordinates();
+                if (CreateBallAtRandomCoordinates())
+                {
+                    n--;
+                }
             }
         }
 
