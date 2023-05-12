@@ -51,7 +51,7 @@ namespace Logic
         {
             Random r = new();
 
-            int radius = 5;
+            int radius = 10;
 
             int[] speeds = { -3, -2, -1, 0, 1, 2, 3 };
             int xSpeed = r.Next(0, 7);
@@ -91,12 +91,12 @@ namespace Logic
             {
                 ball.SetBoundries(vector);
             }
-
-            await Task.Run(() => { MoveTasks(); });
+ 
             while (true) 
             {
-                
+                await Task.Run(() => { MoveTasks(); Thread.Sleep(16); Check(); });
             }
+            
         }
 
         private async void MoveTasks()
@@ -107,6 +107,37 @@ namespace Logic
                 await Task.Run(() => {
                     ball.Move(vector);
                 });
+            }
+        }
+
+        private float CalcDistance(IBall a, IBall b)
+        {
+            return (float)Math.Sqrt((a.Position_X - b.Position_X) * (a.Position_X - b.Position_X) + (a.Position_Y - b.Position_Y) * (a.Position_Y - b.Position_Y));
+        }
+
+        private void Check()
+        {
+            for(int i = 0; i < GetRepositroyListSize(); i++)
+            {
+                lock(GetBallRepositoryList()[i])
+                {
+                    for (int j = i + 1; j < GetRepositroyListSize(); j++)
+                    {
+                        lock(GetBallRepositoryList()[j])
+                        {
+                            if (CalcDistance(GetBallRepositoryList()[i], GetBallRepositoryList()[j]) <= 2 * GetBallRepositoryList()[i].Radius)
+                            {
+                                int x = GetBallRepositoryList()[i].Speed_X;
+                                int y = GetBallRepositoryList()[i].Speed_Y;
+                                GetBallRepositoryList()[i].Speed_X = GetBallRepositoryList()[j].Speed_X;
+                                GetBallRepositoryList()[i].Speed_Y = GetBallRepositoryList()[j].Speed_Y;
+                                GetBallRepositoryList()[j].Speed_X = x;
+                                GetBallRepositoryList()[j].Speed_X = y;
+                            }
+                        }
+                    }
+                }
+                
             }
         }
 

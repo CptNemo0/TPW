@@ -122,28 +122,20 @@ namespace Logic
 
         public override void Move(object? obj)
         {
-            if (obj == null) throw new ArgumentNullException("object is null");
-            if (obj is Vector2)
-            {
-                float boardWidth = boardSize[0];
-                float boardHeight = boardSize[1];
+            float boardWidth = boardSize[0];
+            float boardHeight = boardSize[1];
 
-                if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
-                {
-                    ChangeXdirection();
-                }
-                if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
-                {
-                    ChangeYdirection();
-                }
-                Position_X += Speed_X;
-                Position_Y += Speed_Y;
-                Task.Delay(16);
-            }
-            else
+            if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
             {
-                throw new ArgumentException("object was not a vector2 of boardsize");
+                ChangeXdirection();
             }
+            if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
+            {
+                ChangeYdirection();
+            }
+            Position_X += Speed_X;
+            Position_Y += Speed_Y;
+           
         }
 
         public override void SetBoundries(Vector2 vector)
