@@ -27,7 +27,7 @@ namespace Logic
         public abstract void ChangeXdirection();
         public abstract void ChangeYdirection();
         public abstract void Move(object? obj);
-        public abstract void StartMovement(Vector2 vector);
+        public abstract void SetBoundries(Vector2 vector);
         public abstract void BallStop();
         public abstract void BallGo();
     }

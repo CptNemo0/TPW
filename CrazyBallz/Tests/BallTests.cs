@@ -60,8 +60,8 @@ namespace Tests
         [Test]
         public void StartMovemntTest()
         {
-            ball1.StartMovement(vector);
-            ball2.StartMovement(vector);
+            ball1.SetBoundries(vector);
+            ball2.SetBoundries(vector);
             Assert.That(ball1.Timer, Is.Not.Null);
             Assert.That(ball2.Timer, Is.Not.Null);
             ball1.Timer.Dispose();

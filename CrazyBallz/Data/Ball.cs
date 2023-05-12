@@ -138,6 +138,7 @@ namespace Logic
                 }
                 Position_X += Speed_X;
                 Position_Y += Speed_Y;
+                Task.Delay(16);
             }
             else
             {
@@ -145,10 +146,9 @@ namespace Logic
             }
         }
 
-        public override void StartMovement(Vector2 vector)
+        public override void SetBoundries(Vector2 vector)
         {
             boardSize = vector;
-            Timer = new Timer(Move, vector, 0, 16);
         }
 
         private void SaveSpeeds()

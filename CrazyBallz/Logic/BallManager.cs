@@ -84,51 +84,29 @@ namespace Logic
             return Repository.GetAmountOfBalls();
         }
 
-        public override void StartBallsMovement()
+        public override async void StartBallsMovement()
         {
-            
             Vector2 vector = new Vector2(boardWidth, boardHeight);
-            /*
-            Vector2 vector = new Vector2(boardWidth, boardHeight);
-            for (int i = 0; i< GetRepositroyListSize(); i++)
+            foreach (IBall ball in GetBallRepositoryList())
             {
-                GetBallRepositoryList()[i].StartMovement(vector); 
+                ball.SetBoundries(vector);
             }
-            */
-            bool flag = true;
+
+            await Task.Run(() => { MoveTasks(); });
             while (true) 
             {
-                List<Task> tasks = new List<Task>();
-                if (flag)
-                {
-                    foreach (IBall ball in GetBallRepositoryList())
-                    {
-                        tasks.Add(Task.Run(() => {
-                            ball.Move(vector);
-                        }));
-                    }
-                    flag = !flag;
-                }
+                
+            }
+        }
 
-                Console.WriteLine(tasks.Count);
-
-                Task gigachad = Task.WhenAll(tasks.ToArray());
-
-                try
-                {
-                    gigachad.Wait();
-                }
-                catch { }
-
-                if(gigachad.Status == TaskStatus.RanToCompletion) 
-                {
-                    Task.Delay(2000);
-                    flag = !flag;
-                }
-                else if (gigachad.Status == TaskStatus.Faulted)
-                {
-                    Console.WriteLine("ups!");
-                }
+        private async void MoveTasks()
+        {
+            Vector2 vector = new Vector2(boardWidth, boardHeight);
+            foreach (IBall ball in GetBallRepositoryList())
+            {
+                await Task.Run(() => {
+                    ball.Move(vector);
+                });
             }
         }
 
