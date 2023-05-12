@@ -139,7 +139,6 @@ namespace Logic
                                 GetBallRepositoryList()[j].Move();
                                 GetBallRepositoryList()[j].Speed_X = x;
                                 GetBallRepositoryList()[j].Speed_X = y;
-                                
                             }
                         }
                     }
