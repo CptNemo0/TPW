@@ -89,7 +89,7 @@ namespace Logic
             }
             else
             {
-                throw new ArgumentException("object was not a board class");
+                throw new ArgumentException("object was not a vector2 of boardsize");
             }
         }
 
