@@ -53,9 +53,9 @@ namespace Logic
 
             int radius = 10;
 
-            int[] speeds = { -3, -2, -1, 0, 1, 2, 3 };
-            int xSpeed = r.Next(0, 7);
-            int ySpeed = r.Next(0, 7);
+            int[] speeds = { -3, -2, -1, 1, 2, 3 };
+            int xSpeed = r.Next(0, 6);
+            int ySpeed = r.Next(0, 6);
             if(ySpeed == 3 && xSpeed == 3)
             {
                 ySpeed++;
