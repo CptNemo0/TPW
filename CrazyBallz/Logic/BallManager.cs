@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Numerics;
+using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Logic.Data;
 
 namespace Logic
@@ -82,10 +86,49 @@ namespace Logic
 
         public override void StartBallsMovement()
         {
+            
+            Vector2 vector = new Vector2(boardWidth, boardHeight);
+            /*
             Vector2 vector = new Vector2(boardWidth, boardHeight);
             for (int i = 0; i< GetRepositroyListSize(); i++)
             {
                 GetBallRepositoryList()[i].StartMovement(vector); 
+            }
+            */
+            bool flag = true;
+            while (true) 
+            {
+                List<Task> tasks = new List<Task>();
+                if (flag)
+                {
+                    foreach (IBall ball in GetBallRepositoryList())
+                    {
+                        tasks.Add(Task.Run(() => {
+                            ball.Move(vector);
+                        }));
+                    }
+                    flag = !flag;
+                }
+
+                Console.WriteLine(tasks.Count);
+
+                Task gigachad = Task.WhenAll(tasks.ToArray());
+
+                try
+                {
+                    gigachad.Wait();
+                }
+                catch { }
+
+                if(gigachad.Status == TaskStatus.RanToCompletion) 
+                {
+                    Task.Delay(2000);
+                    flag = !flag;
+                }
+                else if (gigachad.Status == TaskStatus.Faulted)
+                {
+                    Console.WriteLine("ups!");
+                }
             }
         }
 
