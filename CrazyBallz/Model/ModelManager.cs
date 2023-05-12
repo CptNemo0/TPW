@@ -48,6 +48,7 @@ namespace Model
                 ModelBalls.Add(modelBall);
                 ball.PropertyChanged += modelBall.Update!;
                 Console.WriteLine(modelBall.Position_X.ToString());
+                modelBall.DetermineColour(ball.Mass);
             }
             
             return ModelBalls;

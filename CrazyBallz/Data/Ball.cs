@@ -13,6 +13,7 @@ namespace Logic
         private int speed_Y;
         private int stop_X;
         private int stop_Y;
+        private int mass;
         private Timer? timer;
         private Vector2 boardSize;
 
@@ -98,14 +99,19 @@ namespace Logic
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
         public override int Stop_X { get => stop_X; set => stop_X = value; }
         public override int Stop_Y { get => stop_Y; set => stop_Y = value; }
-
-        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y)
+        public override int Mass
+        {
+            get => mass;
+            set { mass = value; NotifyPropertyChanged(); }
+        }
+        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass)
         {
             this.postion_X = postion_X;
             this.postion_Y = postion_Y;
             this.radius = radius;
             this.speed_X = speed_X;
             this.speed_Y = speed_Y;
+            this.mass = mass;
             this.stop_X = 0;
             this.stop_Y = 0;
         }

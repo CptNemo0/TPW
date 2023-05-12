@@ -18,7 +18,7 @@ namespace Logic
             return new BallManager(boardHeight, boardWidth);
         }
 
-        public abstract bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed);
+        public abstract bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass);
 
         public abstract bool CreateBallAtRandomCoordinates();
 

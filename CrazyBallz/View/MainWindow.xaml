@@ -20,7 +20,7 @@
         <ItemsControl Width="1400" Height="700"  Margin="100,100,100,100" ItemsSource="{Binding ModelBalls}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Background="#1b1e23" />
+                    <Canvas Background="#434A57" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -31,7 +31,7 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Path Fill="#d3c2a6" Stroke="Black" StrokeThickness="1">
+                    <Path Fill="{Binding Colour}" Stroke="Black" StrokeThickness="1">
                         <Path.Data>
                             <EllipseGeometry
                                 RadiusX="{Binding Radius}"

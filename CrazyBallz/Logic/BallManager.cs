@@ -31,7 +31,7 @@ namespace Logic
             Repository = DataApi.Instantiate();
         }
 
-        public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed)
+        public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
         {
             if 
             (
@@ -42,7 +42,7 @@ namespace Logic
                 throw new ArgumentException("Ball was exceeding board range");
             }
 
-            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed);
+            IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass);
             bool addable = true;
             foreach (IBall ballFromList in GetBallRepositoryList())
             {
@@ -64,7 +64,8 @@ namespace Logic
             int[] speeds = { -3, -2, -1, 1, 2, 3 };
             int xSpeed = r.Next(0, 6);
             int ySpeed = r.Next(0, 6);
-            if(ySpeed == 3 && xSpeed == 3)
+            int mass = r.Next(1, 11);
+            if (ySpeed == 3 && xSpeed == 3)
             {
                 ySpeed++;
             }
@@ -73,7 +74,8 @@ namespace Logic
                 r.Next(radius, boardHeight - radius),
                 radius,
                 speeds[xSpeed],
-                speeds[ySpeed]
+                speeds[ySpeed],
+                mass
             );
         }
 
@@ -123,6 +125,28 @@ namespace Logic
             return (float)Math.Sqrt((a.Position_X - b.Position_X) * (a.Position_X - b.Position_X) + (a.Position_Y - b.Position_Y) * (a.Position_Y - b.Position_Y));
         }
 
+        public void HandleCollision(IBall a, IBall b)
+        {
+            int Vx1, Vy1, Vx2, Vy2;
+
+            Vx1 = (a.Mass * a.Speed_X + b.Mass * b.Speed_X - b.Mass * (a.Speed_X - b.Speed_X)) / (a.Mass + b.Mass);
+            Vy1 = (a.Mass * a.Speed_Y + b.Mass * b.Speed_Y - b.Mass * (a.Speed_Y - b.Speed_Y)) / (a.Mass + b.Mass);
+            Vx2 = (a.Mass * a.Speed_X + b.Mass * b.Speed_X - a.Mass * (b.Speed_X - a.Speed_X)) / (a.Mass + b.Mass);
+            Vy2 = (a.Mass * a.Speed_Y + b.Mass * b.Speed_Y - a.Mass * (b.Speed_Y - a.Speed_Y)) / (a.Mass + b.Mass);
+            
+            a.ChangeXdirection();
+            a.ChangeYdirection();
+            a.Move();
+            a.Speed_X = Vx1;
+            a.Speed_Y = Vy1;
+
+            b.ChangeXdirection();
+            b.ChangeYdirection();
+            b.Move();
+            b.Speed_X = Vx2;
+            b.Speed_Y = Vy2;
+        }
+
         private void Check()
         {
             for(int i = 0; i < GetRepositroyListSize(); i++)
@@ -135,6 +159,8 @@ namespace Logic
                         {
                             if (CalcDistance(GetBallRepositoryList()[i], GetBallRepositoryList()[j]) <= 2 * GetBallRepositoryList()[i].Radius)
                             {
+                                HandleCollision(GetBallRepositoryList()[i], GetBallRepositoryList()[j]);
+                                /*
                                 int x = GetBallRepositoryList()[i].Speed_X;
                                 int y = GetBallRepositoryList()[i].Speed_Y;
                                 GetBallRepositoryList()[i].ChangeXdirection();
@@ -147,6 +173,7 @@ namespace Logic
                                 GetBallRepositoryList()[j].Move();
                                 GetBallRepositoryList()[j].Speed_X = x;
                                 GetBallRepositoryList()[j].Speed_X = y;
+                                */
                             }
                         }
                     }
