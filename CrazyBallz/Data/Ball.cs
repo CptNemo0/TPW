@@ -20,13 +20,39 @@ namespace Logic
 
         public override int Position_X
         {
-            get => postion_X;
-            set { postion_X = value; NotifyPropertyChanged(); }
+            get
+            {
+                lock (this)
+                {
+                    return postion_X;
+                }
+            }
+            set
+            {
+                lock (this)
+                {
+                    postion_X = value;
+                }
+                NotifyPropertyChanged();
+            }
         }
         public override int Position_Y
         {
-            get => postion_Y;
-            set { postion_Y = value; NotifyPropertyChanged(); }
+            get
+            {
+                lock (this)
+                {
+                    return postion_Y;
+                }
+            }
+            set
+            {
+                lock (this)
+                {
+                    postion_Y = value;
+                }
+                NotifyPropertyChanged();
+            }
         }
         public override int Radius
         {
@@ -34,13 +60,39 @@ namespace Logic
         }
         public override int Speed_X
         {
-            get => speed_X;
-            set { speed_X = value; NotifyPropertyChanged(); }
+            get
+            {
+                lock(this) 
+                {
+                    return speed_X; 
+                }
+            }
+            set 
+            {
+                lock (this) 
+                {
+                    speed_X = value; 
+                } 
+                NotifyPropertyChanged(); 
+            }
         }
         public override int Speed_Y
         {
-            get => speed_Y;
-            set { speed_Y = value; NotifyPropertyChanged(); }
+            get
+            {
+                lock (this)
+                {
+                    return speed_Y;
+                }
+            }
+            set
+            {
+                lock (this)
+                {
+                    speed_Y = value;
+                }
+                NotifyPropertyChanged();
+            }
         }
         public override Timer? Timer { get => timer; set => timer = value; }
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
