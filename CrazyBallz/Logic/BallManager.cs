@@ -182,10 +182,7 @@ namespace Logic
         {
             for (int i = 0; i < GetRepositroyListSize(); i++)
             {
-                if (GetBallRepositoryList()[i].Timer != null)
-                {
-                    GetBallRepositoryList()[i].Timer.Dispose();
-                }
+                
             }
         }
     }

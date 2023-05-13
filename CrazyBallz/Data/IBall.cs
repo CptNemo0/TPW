@@ -10,10 +10,7 @@ namespace Data
         public abstract int Radius { get; }
         public abstract int Speed_X { get; set; }
         public abstract int Speed_Y { get; set; }
-        public abstract int Stop_X { get; set; }
-        public abstract int Stop_Y { get; set; }
         public abstract int Mass { get; set; }
-        public abstract Timer? Timer { get; set; }
         public abstract Vector2 BoardSize { get; set; }
 
         public abstract event PropertyChangedEventHandler? PropertyChanged;
@@ -27,7 +24,5 @@ namespace Data
         public abstract void ChangeYdirection();
         public abstract void Move();
         public abstract void SetBoundries(Vector2 vector);
-        public abstract void BallStop();
-        public abstract void BallGo();
     }
 }
