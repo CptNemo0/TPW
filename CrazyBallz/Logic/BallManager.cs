@@ -1,14 +1,9 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
 using System.Numerics;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using Logic.Data;
 
 namespace Logic
 {
@@ -24,7 +19,7 @@ namespace Logic
 
         public override int BoardHeight => boardHeight;
 
-        public BallManager(int width, int height) 
+        public BallManager(int width, int height)
         {
             boardWidth = width;
             boardHeight = height;
@@ -33,9 +28,9 @@ namespace Logic
 
         public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
         {
-            if 
+            if
             (
-                x < radius || x > boardWidth - radius || xSpeed > boardWidth - radius || xSpeed < -1 * boardWidth + radius || 
+                x < radius || x > boardWidth - radius || xSpeed > boardWidth - radius || xSpeed < -1 * boardWidth + radius ||
                 y < radius || y > boardHeight - radius || ySpeed > boardHeight - radius || ySpeed < -1 * boardHeight + radius
             )
             {
@@ -46,7 +41,7 @@ namespace Logic
             bool addable = true;
             foreach (IBall ballFromList in GetBallRepositoryList())
             {
-                if (CalcDistance(ball, ballFromList) <= radius*2) { addable = false; break; }
+                if (CalcDistance(ball, ballFromList) <= radius * 2) { addable = false; break; }
             }
             if (addable)
             {
@@ -70,7 +65,7 @@ namespace Logic
                 ySpeed++;
             }
             return CreateBall(
-                r.Next(radius, boardWidth - radius), 
+                r.Next(radius, boardWidth - radius),
                 r.Next(radius, boardHeight - radius),
                 radius,
                 speeds[xSpeed],
@@ -101,12 +96,12 @@ namespace Logic
             {
                 ball.SetBoundries(vector);
             }
- 
-            while (true) 
+
+            while (true)
             {
                 await Task.Run(() => { MoveTasks(); Thread.Sleep(16); Check(); });
             }
-            
+
         }
 
         private async void MoveTasks()
@@ -114,7 +109,8 @@ namespace Logic
             Vector2 vector = new Vector2(boardWidth, boardHeight);
             foreach (IBall ball in GetBallRepositoryList())
             {
-                await Task.Run(() => {
+                await Task.Run(() =>
+                {
                     ball.Move();
                 });
             }
@@ -133,7 +129,7 @@ namespace Logic
             Vy1 = (a.Mass * a.Speed_Y + b.Mass * b.Speed_Y - b.Mass * (a.Speed_Y - b.Speed_Y)) / (a.Mass + b.Mass);
             Vx2 = (a.Mass * a.Speed_X + b.Mass * b.Speed_X - a.Mass * (b.Speed_X - a.Speed_X)) / (a.Mass + b.Mass);
             Vy2 = (a.Mass * a.Speed_Y + b.Mass * b.Speed_Y - a.Mass * (b.Speed_Y - a.Speed_Y)) / (a.Mass + b.Mass);
-            
+
             a.ChangeXdirection();
             a.ChangeYdirection();
             a.Move();
@@ -149,13 +145,13 @@ namespace Logic
 
         private void Check()
         {
-            for(int i = 0; i < GetRepositroyListSize(); i++)
+            for (int i = 0; i < GetRepositroyListSize(); i++)
             {
-                lock(GetBallRepositoryList()[i])
+                lock (GetBallRepositoryList()[i])
                 {
                     for (int j = i + 1; j < GetRepositroyListSize(); j++)
                     {
-                        lock(GetBallRepositoryList()[j])
+                        lock (GetBallRepositoryList()[j])
                         {
                             if (CalcDistance(GetBallRepositoryList()[i], GetBallRepositoryList()[j]) <= 2 * GetBallRepositoryList()[i].Radius)
                             {
@@ -178,7 +174,7 @@ namespace Logic
                         }
                     }
                 }
-                
+
             }
         }
 

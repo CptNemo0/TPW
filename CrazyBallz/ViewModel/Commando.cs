@@ -19,7 +19,7 @@ namespace ViewModel
 
         public bool CanExecute(object? parameter)
         {
-            if(ready is null)
+            if (ready is null)
             {
                 return false;
             }

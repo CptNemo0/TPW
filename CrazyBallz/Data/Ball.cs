@@ -2,7 +2,7 @@
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace Logic
+namespace Data
 {
     internal class Ball : IBall, INotifyPropertyChanged
     {
@@ -63,18 +63,18 @@ namespace Logic
         {
             get
             {
-                lock(this) 
+                lock (this)
                 {
-                    return speed_X; 
+                    return speed_X;
                 }
             }
-            set 
+            set
             {
-                lock (this) 
+                lock (this)
                 {
-                    speed_X = value; 
-                } 
-                NotifyPropertyChanged(); 
+                    speed_X = value;
+                }
+                NotifyPropertyChanged();
             }
         }
         public override int Speed_Y
@@ -141,7 +141,7 @@ namespace Logic
             }
             Position_X += Speed_X;
             Position_Y += Speed_Y;
-           
+
         }
 
         public override void SetBoundries(Vector2 vector)
@@ -154,7 +154,7 @@ namespace Logic
             stop_X = speed_X;
             stop_Y = speed_Y;
         }
-        
+
         private void ResumeSpeeds()
         {
             speed_X = stop_X;

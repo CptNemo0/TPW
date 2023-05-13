@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logic.Data
+﻿namespace Data
 {
     internal class BallRepository : DataApi
     {
         private List<IBall> balls = new();
 
-        public override List<IBall>? Balls 
-        { 
-            get => balls;  
+        public override List<IBall>? Balls
+        {
+            get => balls;
         }
 
         public override void AddBall(IBall ball)

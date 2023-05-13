@@ -1,12 +1,7 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ViewModel
 {
@@ -22,14 +17,16 @@ namespace ViewModel
         public Commando CommandReset { get => commandReset; set => commandReset = value; }
         public ModelApi ModelApi { get => modelApi; set => modelApi = value; }
         public bool Swtch { get => swtch; set { swtch = value; NotifyPropertyChanged(); } }
-        public string Ballz { get => ballz; set { ballz = value; NotifyPropertyChanged(); }
-}
-        
+        public string Ballz
+        {
+            get => ballz; set { ballz = value; NotifyPropertyChanged(); }
+        }
+
         public ObservableCollection<IModelBall> ModelBalls => modelApi.ReloadResub();
 
         public event PropertyChangedEventHandler? PropertyChanged;
-    
-        public ViewMdl() 
+
+        public ViewMdl()
         {
             CommandStart = new Commando(Start, StartReady);
             CommandReset = new Commando(Reset, ResetReady);
@@ -38,7 +35,7 @@ namespace ViewModel
 
         private void Start()
         {
-            if(Ballz.Length > 0)
+            if (Ballz.Length > 0)
             {
                 int amount = int.Parse(Ballz);
                 if (amount > 0)
@@ -51,7 +48,7 @@ namespace ViewModel
             }
         }
 
-        private void Reset() 
+        private void Reset()
         {
             modelApi.StopBallsMovement();
             modelApi.RemoveAllBalls();

@@ -1,9 +1,7 @@
-using System;
 using System.ComponentModel;
 using System.Numerics;
-using System.Threading;
 
-namespace Logic
+namespace Data
 {
     public abstract class IBall
     {
