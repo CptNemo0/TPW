@@ -1,18 +1,16 @@
-﻿/*using Logic;
-
-namespace Tests
+﻿namespace DataTests
 {
     internal class BallRepositoryTests
     {
         DataApi Repository = DataApi.Instantiate();
 
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
-            Repository.RemoveAllBalls(); 
+            Repository.RemoveAllBalls();
             for (int i = 0; i < 5; i++)
             {
-                Repository.AddBall(IBall.CreateBall(5, 5, 5, 1, 1));
+                Repository.AddBall(IBall.CreateBall(5, 5, 5, 1, 1, 1));
             }
         }
 
@@ -20,26 +18,28 @@ namespace Tests
         public void GetBallsListTest()
         {
             Assert.That(Repository.Balls.Count, Is.EqualTo(5));
-            for (int i = 0; i < Repository.Balls.Count; i++) 
+            for (int i = 0; i < Repository.Balls.Count; i++)
             {
                 Assert.That(Repository.Balls[i].Position_X, Is.EqualTo(5));
                 Assert.That(Repository.Balls[i].Position_Y, Is.EqualTo(5));
                 Assert.That(Repository.Balls[i].Radius, Is.EqualTo(5));
                 Assert.That(Repository.Balls[i].Speed_X, Is.EqualTo(1));
                 Assert.That(Repository.Balls[i].Speed_Y, Is.EqualTo(1));
+                Assert.That(Repository.Balls[i].Mass, Is.EqualTo(1));
             }
         }
 
         [Test]
         public void AddBallTest()
         {
-            Repository.AddBall(IBall.CreateBall(5, 5, 5, 1, 1));
+            Repository.AddBall(IBall.CreateBall(5, 5, 5, 1, 1, 1));
             Assert.That(Repository.Balls.Count, Is.EqualTo(6));
             Assert.That(Repository.Balls[5].Position_X, Is.EqualTo(5));
             Assert.That(Repository.Balls[5].Position_Y, Is.EqualTo(5));
             Assert.That(Repository.Balls[5].Radius, Is.EqualTo(5));
             Assert.That(Repository.Balls[5].Speed_X, Is.EqualTo(1));
             Assert.That(Repository.Balls[5].Speed_Y, Is.EqualTo(1));
+            Assert.That(Repository.Balls[5].Mass, Is.EqualTo(1));
         }
 
         [Test]
@@ -65,4 +65,3 @@ namespace Tests
         }
     }
 }
-*/
