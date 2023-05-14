@@ -6,17 +6,17 @@ namespace Data
 {
     internal class Ball : IBall, INotifyPropertyChanged
     {
-        private int postion_X;
-        private int postion_Y;
+        private float postion_X;
+        private float postion_Y;
         private readonly int radius;
-        private int speed_X;
-        private int speed_Y;
+        private float speed_X;
+        private float speed_Y;
         private int mass;
         private Vector2 boardSize;
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
-        public override int Position_X
+        public override float Position_X
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Data
                 NotifyPropertyChanged();
             }
         }
-        public override int Position_Y
+        public override float Position_Y
         {
             get
             {
@@ -56,7 +56,7 @@ namespace Data
         {
             get => radius;
         }
-        public override int Speed_X
+        public override float Speed_X
         {
             get
             {
@@ -74,7 +74,7 @@ namespace Data
                 NotifyPropertyChanged();
             }
         }
-        public override int Speed_Y
+        public override float Speed_Y
         {
             get
             {
@@ -98,7 +98,7 @@ namespace Data
             get => mass;
             set { mass = value; NotifyPropertyChanged(); }
         }
-        public Ball(int postion_X, int postion_Y, int radius, int speed_X, int speed_Y, int mass)
+        public Ball(float postion_X, float postion_Y, int radius, float speed_X, float speed_Y, int mass)
         {
             this.postion_X = postion_X;
             this.postion_Y = postion_Y;
