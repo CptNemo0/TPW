@@ -1,6 +1,5 @@
-﻿using Logic;
-using Data;
-using System;
+﻿using Data;
+using Logic;
 using System.Collections.ObjectModel;
 
 namespace Model

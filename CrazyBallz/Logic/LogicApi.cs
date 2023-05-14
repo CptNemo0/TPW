@@ -5,7 +5,7 @@ namespace Logic
 {
     public abstract class LogicApi
     {
-        public abstract DataApi? Repository { get; set; }
+        public abstract DataApi Repository { get; set; }
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
 

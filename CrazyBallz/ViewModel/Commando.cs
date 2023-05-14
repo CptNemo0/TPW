@@ -8,7 +8,7 @@ namespace ViewModel
         private readonly Action method;
         private readonly Func<bool>? ready;
         public event EventHandler? CanExecuteChanged;
-
+        
         public Commando(Action method, Func<bool>? ready = null)
         {
             if (method is null) throw new ArgumentNullException("method");
@@ -37,6 +37,16 @@ namespace ViewModel
         internal void NotifyCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private bool DefaultAction()
+        {
+            return true;
+        }
+
+        private bool DefaultReady()
+        {
+            return false;
         }
     }
 }

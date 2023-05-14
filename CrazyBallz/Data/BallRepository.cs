@@ -1,6 +1,6 @@
 ﻿namespace Data
 {
-    internal class BallRepository : DataApi
+    public class BallRepository : DataApi
     {
         private List<IBall> balls = new();
 

@@ -7,14 +7,12 @@ namespace ViewModel
 {
     public class ViewMdl : INotifyPropertyChanged
     {
-        private Commando commandStart;
-        private Commando commandReset;
         private ModelApi modelApi;
         private bool swtch = true;
         private string ballz = string.Empty;
 
-        public Commando CommandStart { get => commandStart; set => commandStart = value; }
-        public Commando CommandReset { get => commandReset; set => commandReset = value; }
+        public Commando CommandStart { get ; set; } = new Commando(DefaultAction, DefaultReady)!;
+        public Commando CommandReset { get; set; } = new Commando(DefaultAction, DefaultReady)!;
         public ModelApi ModelApi { get => modelApi; set => modelApi = value; }
         public bool Swtch { get => swtch; set { swtch = value; NotifyPropertyChanged(); } }
         public string Ballz
@@ -28,8 +26,8 @@ namespace ViewModel
 
         public ViewMdl()
         {
-            CommandStart = new Commando(Start, StartReady);
-            CommandReset = new Commando(Reset, ResetReady);
+            CommandStart = new Commando(Start, StartReady)!;
+            CommandReset = new Commando(Reset, ResetReady)!;
             modelApi = ModelApi.Instantiate();
         }
 
@@ -77,6 +75,17 @@ namespace ViewModel
         private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    
+        
+        private static void DefaultAction()
+        {
+            throw new System.Exception("ViewMdl contructor was not used!!!");
+        }
+
+        private static bool DefaultReady()
+        {
+            return false;
         }
     }
 }

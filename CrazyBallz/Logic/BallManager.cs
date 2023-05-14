@@ -11,9 +11,9 @@ namespace Logic
     {
         private readonly int boardWidth;
         private readonly int boardHeight;
-        private DataApi repository;
+        private bool flag = false;
 
-        public override DataApi Repository { get => repository; set => repository = value; }
+        public override DataApi Repository { get; set; } = new BallRepository();
 
         public override int BoardWitdth => boardWidth;
 
@@ -76,7 +76,7 @@ namespace Logic
 
         public override List<IBall> GetBallRepositoryList()
         {
-            return Repository.Balls;
+            return Repository.Balls!;
         }
 
         public override void RemoveAllBalls()
@@ -91,6 +91,7 @@ namespace Logic
 
         public override async void StartBallsMovement()
         {
+            flag = false;
             Vector2 vector = new Vector2(boardWidth, boardHeight);
             foreach (IBall ball in GetBallRepositoryList())
             {
@@ -100,6 +101,10 @@ namespace Logic
             while (true)
             {
                 await Task.Run(() => { MoveTasks(); Thread.Sleep(16); Check(); });
+                if(flag)
+                {
+                    break;
+                }
             }
 
         }
@@ -163,13 +168,12 @@ namespace Logic
 
             }
         }
-
         public override void StopBallsMovement()
         {
-            for (int i = 0; i < GetRepositroyListSize(); i++)
-            {
-                
-            }
+            flag = true;
+            Console.WriteLine(GetRepositroyListSize());
+
         }
+    
     }
 }
