@@ -13,7 +13,7 @@ namespace Logic
         private readonly int boardHeight;
         private DataApi repository;
 
-        public override DataApi? Repository { get => repository; set => repository = value; }
+        public override DataApi Repository { get => repository; set => repository = value; }
 
         public override int BoardWitdth => boardWidth;
 
@@ -121,7 +121,7 @@ namespace Logic
             return (float)Math.Sqrt((a.Position_X - b.Position_X) * (a.Position_X - b.Position_X) + (a.Position_Y - b.Position_Y) * (a.Position_Y - b.Position_Y));
         }
 
-        public void HandleCollision(IBall a, IBall b)
+        public override void HandleCollision(IBall a, IBall b)
         {
             float Vx1, Vy1, Vx2, Vy2;
 
@@ -156,20 +156,6 @@ namespace Logic
                             if (CalcDistance(GetBallRepositoryList()[i], GetBallRepositoryList()[j]) <= 2 * GetBallRepositoryList()[i].Radius)
                             {
                                 HandleCollision(GetBallRepositoryList()[i], GetBallRepositoryList()[j]);
-                                /*
-                                int x = GetBallRepositoryList()[i].Speed_X;
-                                int y = GetBallRepositoryList()[i].Speed_Y;
-                                GetBallRepositoryList()[i].ChangeXdirection();
-                                GetBallRepositoryList()[i].ChangeYdirection();
-                                GetBallRepositoryList()[i].Move();
-                                GetBallRepositoryList()[i].Speed_X = GetBallRepositoryList()[j].Speed_X;
-                                GetBallRepositoryList()[i].Speed_Y = GetBallRepositoryList()[j].Speed_Y;
-                                GetBallRepositoryList()[j].ChangeXdirection();
-                                GetBallRepositoryList()[j].ChangeYdirection();
-                                GetBallRepositoryList()[j].Move();
-                                GetBallRepositoryList()[j].Speed_X = x;
-                                GetBallRepositoryList()[j].Speed_X = y;
-                                */
                             }
                         }
                     }

@@ -1,4 +1,4 @@
-﻿/*using System.Numerics;
+﻿using System.Numerics;
 
 namespace Tests
 {
@@ -6,24 +6,23 @@ namespace Tests
     {
         IBall ball1;
         IBall ball2;
-        Vector2 vector;
         [SetUp]
         public void Setup()
         {
-            ball1 = IBall.CreateBall(5, 5, 5, 1, 1);
-            ball2 = IBall.CreateBall(390, 390, 10, 3, 3);
+            ball1 = IBall.CreateBall(5, 5, 5, 1, 1, 1);
+            ball2 = IBall.CreateBall(390, 390, 10, 3, 3, 3);
             Vector2 vector = new Vector2(400, 400);
-            ball1.BoardSize = vector;
-            ball2.BoardSize = vector;
+            ball1.SetBoundries(vector);
+            ball2.SetBoundries(vector);
         }
 
         [Test]
         public void ConstructorTest()
         {
-            Assert.That(ball1.Position_X, Is.EqualTo(5)); 
-            Assert.That(ball1.Position_Y, Is.EqualTo(5)); 
-            Assert.That(ball1.Radius, Is.EqualTo(5)); 
-            Assert.That(ball1.Speed_X, Is.EqualTo(1)); 
+            Assert.That(ball1.Position_X, Is.EqualTo(5));
+            Assert.That(ball1.Position_Y, Is.EqualTo(5));
+            Assert.That(ball1.Radius, Is.EqualTo(5));
+            Assert.That(ball1.Speed_X, Is.EqualTo(1));
             Assert.That(ball1.Speed_Y, Is.EqualTo(1));
         }
 
@@ -32,10 +31,10 @@ namespace Tests
         {
             Assert.That(ball1.Position_X, Is.EqualTo(5));
             Assert.That(ball1.Position_Y, Is.EqualTo(5));
-            ball1.Move(vector);
+            ball1.Move();
             Assert.That(ball1.Position_X, Is.EqualTo(6));
             Assert.That(ball1.Position_Y, Is.EqualTo(6));
-            ball1.Move(vector);
+            ball1.Move();
             Assert.That(ball1.Position_X, Is.EqualTo(7));
             Assert.That(ball1.Position_Y, Is.EqualTo(7));
         }
@@ -49,24 +48,12 @@ namespace Tests
             ball1.Speed_Y = -1;
             Assert.That(ball2.Position_X, Is.EqualTo(390));
             Assert.That(ball2.Position_Y, Is.EqualTo(390));
-            ball1.Move(vector);
-            ball2.Move(vector);
+            ball1.Move();
+            ball2.Move();
             Assert.That(ball1.Position_X, Is.EqualTo(6));
             Assert.That(ball1.Position_Y, Is.EqualTo(6));
             Assert.That(ball2.Position_X, Is.EqualTo(387));
             Assert.That(ball2.Position_Y, Is.EqualTo(387));
         }
-        
-        [Test]
-        public void StartMovemntTest()
-        {
-            ball1.SetBoundries(vector);
-            ball2.SetBoundries(vector);
-            Assert.That(ball1.Timer, Is.Not.Null);
-            Assert.That(ball2.Timer, Is.Not.Null);
-            ball1.Timer.Dispose();
-            ball2.Timer.Dispose();
-        }
     }
 }
-*/

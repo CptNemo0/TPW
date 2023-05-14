@@ -18,13 +18,13 @@ namespace Model
             this.position_x = position_x;
             this.position_y = position_y;
             this.radius = radius;
-            this.colour = null;
+            this.colour = String.Empty;
         }
 
         public override float Position_X { get => position_x; set { position_x = value; NotifyPropertyChanged(); } }
         public override float Position_Y { get => position_y; set { position_y = value; NotifyPropertyChanged(); } }
         public override int Radius => radius;
-        public override string Colour { get => this.colour; set => this.colour = value; }
+        public override string Colour { get => colour; set => colour = value; }
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 

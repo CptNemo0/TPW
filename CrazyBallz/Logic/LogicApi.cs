@@ -27,5 +27,7 @@ namespace Logic
         public abstract void StartBallsMovement();
 
         public abstract void StopBallsMovement();
+
+        public abstract void HandleCollision(IBall a, IBall b);
     }
 }
