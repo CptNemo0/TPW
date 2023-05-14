@@ -69,7 +69,6 @@ namespace ViewModel
             Swtch = !Swtch;
             CommandStart.NotifyCanExecuteChanged();
             CommandReset.NotifyCanExecuteChanged();
-
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
