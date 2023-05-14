@@ -1,7 +1,4 @@
-﻿using Data;
-using Model;
-
-namespace VielModelTests
+﻿namespace VielModelTests
 {
     internal class ViewMdlTest
     {

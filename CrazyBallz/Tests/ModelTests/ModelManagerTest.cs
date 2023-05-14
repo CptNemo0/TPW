@@ -1,6 +1,4 @@
-﻿using Data;
-
-namespace ModelTests
+﻿namespace ModelTests
 {
     internal class ModelManagerTest
     {

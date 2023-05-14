@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="CrazyBalls" Height="900" Width="1600" Background="#afaba2">
+        Title="CrazyBalls" Height="950" Width="1600" Background="#afaba2">
     <Window.DataContext>
         <vm:ViewMdl/>
     </Window.DataContext>

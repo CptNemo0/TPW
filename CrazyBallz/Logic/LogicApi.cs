@@ -1,6 +1,5 @@
 ﻿using Data;
 using System.Collections.Generic;
-using System.Runtime.Intrinsics.X86;
 
 namespace Logic
 {
@@ -32,7 +31,7 @@ namespace Logic
         public abstract void StopBallsMovement();
 
         public abstract float CalcDistance(LogicBall a, LogicBall b);
-        
+
         public abstract void HandleCollision(LogicBall a, LogicBall b);
     }
 }

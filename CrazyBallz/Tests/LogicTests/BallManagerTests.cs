@@ -35,7 +35,7 @@
             manager.CreateBall(5, 5, 5, 1, 1, 1);
             Assert.That(manager.GetRepositroyListSize(), Is.EqualTo(1));
             int i = 100;
-            while (i > 0) 
+            while (i > 0)
             {
                 if (manager.CreateBallAtRandomCoordinates())
                 {
@@ -125,6 +125,6 @@
             Assert.That(b.Speed_X, Is.EqualTo(Vx2));
             Assert.That(b.Speed_Y, Is.EqualTo(Vy2));
         }
-        
+
     }
 }

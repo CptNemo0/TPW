@@ -1,12 +1,7 @@
 ﻿using Data;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic
 {
@@ -128,7 +123,6 @@ namespace Logic
             }
             Position_X += Speed_X;
             Position_Y += Speed_Y;
-
         }
 
         public void SetBoundries(Vector2 vector)

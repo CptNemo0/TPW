@@ -107,7 +107,7 @@ namespace Logic
             while (true)
             {
                 await Task.Run(() => { MoveTasks(); Thread.Sleep(16); Check(); });
-                if(flag)
+                if (flag)
                 {
                     break;
                 }

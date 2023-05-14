@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+﻿using System.Numerics;
 
 namespace Data
 {
@@ -46,7 +44,7 @@ namespace Data
                 {
                     postion_Y = value;
                 }
-                
+
             }
         }
         public override int Radius

@@ -1,2 +1,2 @@
-global using NUnit.Framework;
 global using Data;
+global using NUnit.Framework;

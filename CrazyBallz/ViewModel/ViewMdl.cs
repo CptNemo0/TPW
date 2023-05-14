@@ -11,7 +11,7 @@ namespace ViewModel
         private bool swtch = true;
         private string ballz = string.Empty;
 
-        public Commando CommandStart { get ; set; } = new Commando(DefaultAction, DefaultReady)!;
+        public Commando CommandStart { get; set; } = new Commando(DefaultAction, DefaultReady)!;
         public Commando CommandReset { get; set; } = new Commando(DefaultAction, DefaultReady)!;
         public ModelApi ModelApi { get => modelApi; set => modelApi = value; }
         public bool Swtch { get => swtch; set { swtch = value; NotifyPropertyChanged(); } }
@@ -75,8 +75,8 @@ namespace ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    
-        
+
+
         private static void DefaultAction()
         {
             throw new System.Exception("ViewMdl contructor was not used!!!");
