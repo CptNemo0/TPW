@@ -44,7 +44,6 @@ namespace Model
                 IModelBall modelBall = IModelBall.Instantiate(ball.Position_X, ball.Position_Y, ball.Radius);
                 ModelBalls.Add(modelBall);
                 ball.PropertyChanged += modelBall.Update!;
-                Console.WriteLine(modelBall.Position_X.ToString());
                 modelBall.DetermineColour(ball.Mass);
             }
 
