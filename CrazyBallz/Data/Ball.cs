@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Data
 {
-    internal class Ball : IBall, INotifyPropertyChanged
+    internal class Ball : IBall
     {
         private float postion_X;
         private float postion_Y;
@@ -13,8 +13,6 @@ namespace Data
         private float speed_Y;
         private int mass;
         private Vector2 boardSize;
-
-        public override event PropertyChangedEventHandler? PropertyChanged;
 
         public override float Position_X
         {
@@ -31,7 +29,6 @@ namespace Data
                 {
                     postion_X = value;
                 }
-                NotifyPropertyChanged();
             }
         }
         public override float Position_Y
@@ -49,7 +46,7 @@ namespace Data
                 {
                     postion_Y = value;
                 }
-                NotifyPropertyChanged();
+                
             }
         }
         public override int Radius
@@ -71,7 +68,6 @@ namespace Data
                 {
                     speed_X = value;
                 }
-                NotifyPropertyChanged();
             }
         }
         public override float Speed_Y
@@ -89,14 +85,13 @@ namespace Data
                 {
                     speed_Y = value;
                 }
-                NotifyPropertyChanged();
             }
         }
         public override Vector2 BoardSize { get => boardSize; set => boardSize = value; }
         public override int Mass
         {
             get => mass;
-            set { mass = value; NotifyPropertyChanged(); }
+            set { mass = value; }
         }
         public Ball(float postion_X, float postion_Y, int radius, float speed_X, float speed_Y, int mass)
         {
@@ -106,44 +101,6 @@ namespace Data
             this.speed_X = speed_X;
             this.speed_Y = speed_Y;
             this.mass = mass;
-        }
-
-        public override void ChangeXdirection()
-        {
-            Speed_X *= -1;
-        }
-
-        public override void ChangeYdirection()
-        {
-            Speed_Y *= -1;
-        }
-
-        public override void Move()
-        {
-            float boardWidth = boardSize[0];
-            float boardHeight = boardSize[1];
-
-            if (Position_X + Speed_X >= boardWidth - radius || Position_X + Speed_X <= radius)
-            {
-                ChangeXdirection();
-            }
-            if (Position_Y + Speed_Y >= boardHeight - radius || Position_Y + Speed_Y <= radius)
-            {
-                ChangeYdirection();
-            }
-            Position_X += Speed_X;
-            Position_Y += Speed_Y;
-
-        }
-
-        public override void SetBoundries(Vector2 vector)
-        {
-            boardSize = vector;
-        }
-
-        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

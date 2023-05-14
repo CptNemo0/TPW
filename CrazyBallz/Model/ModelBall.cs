@@ -30,7 +30,7 @@ namespace Model
 
         public override void Update(Object s, PropertyChangedEventArgs e)
         {
-            IBall ball = (IBall)s;
+            LogicBall ball = (LogicBall)s;
             switch (e.PropertyName)
             {
                 case nameof(Position_X):

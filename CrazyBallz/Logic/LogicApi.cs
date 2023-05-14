@@ -1,5 +1,6 @@
 ﻿using Data;
 using System.Collections.Generic;
+using System.Runtime.Intrinsics.X86;
 
 namespace Logic
 {
@@ -8,6 +9,8 @@ namespace Logic
         public abstract DataApi Repository { get; set; }
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
+
+        public abstract List<LogicBall> LogicBalls { get; set; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
         {
@@ -28,6 +31,8 @@ namespace Logic
 
         public abstract void StopBallsMovement();
 
-        public abstract void HandleCollision(IBall a, IBall b);
+        public abstract float CalcDistance(LogicBall a, LogicBall b);
+        
+        public abstract void HandleCollision(LogicBall a, LogicBall b);
     }
 }

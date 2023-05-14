@@ -38,7 +38,7 @@ namespace Model
         public override ObservableCollection<IModelBall> ReloadResub()
         {
             ModelBalls.Clear();
-            foreach (IBall ball in logicApi.GetBallRepositoryList())
+            foreach (LogicBall ball in logicApi.LogicBalls)
             {
                 IModelBall modelBall = IModelBall.Instantiate(ball.Position_X, ball.Position_Y, ball.Radius);
                 ModelBalls.Add(modelBall);

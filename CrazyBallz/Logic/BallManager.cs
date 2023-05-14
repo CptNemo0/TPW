@@ -12,12 +12,15 @@ namespace Logic
         private readonly int boardWidth;
         private readonly int boardHeight;
         private bool flag = false;
+        private List<LogicBall> logicBalls = new();
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
         public override int BoardWitdth => boardWidth;
 
         public override int BoardHeight => boardHeight;
+
+        public override List<LogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
 
         public BallManager(int width, int height)
         {
@@ -38,14 +41,16 @@ namespace Logic
             }
 
             IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass);
+            LogicBall logicBall = new LogicBall(ball);
             bool addable = true;
-            foreach (IBall ballFromList in GetBallRepositoryList())
+            foreach (LogicBall LogicBallFromList in LogicBalls)
             {
-                if (CalcDistance(ball, ballFromList) <= radius * 2) { addable = false; break; }
+                if (CalcDistance(logicBall, LogicBallFromList) <= radius * 2) { addable = false; break; }
             }
             if (addable)
             {
                 Repository.AddBall(ball);
+                LogicBalls.Add(new LogicBall(ball));
             }
             return addable;
         }
@@ -81,6 +86,7 @@ namespace Logic
 
         public override void RemoveAllBalls()
         {
+            LogicBalls.Clear();
             Repository.RemoveAllBalls();
         }
 
@@ -93,7 +99,7 @@ namespace Logic
         {
             flag = false;
             Vector2 vector = new Vector2(boardWidth, boardHeight);
-            foreach (IBall ball in GetBallRepositoryList())
+            foreach (LogicBall ball in LogicBalls)
             {
                 ball.SetBoundries(vector);
             }
@@ -112,7 +118,7 @@ namespace Logic
         private async void MoveTasks()
         {
             Vector2 vector = new Vector2(boardWidth, boardHeight);
-            foreach (IBall ball in GetBallRepositoryList())
+            foreach (LogicBall ball in LogicBalls)
             {
                 await Task.Run(() =>
                 {
@@ -121,12 +127,12 @@ namespace Logic
             }
         }
 
-        private float CalcDistance(IBall a, IBall b)
+        public override float CalcDistance(LogicBall a, LogicBall b)
         {
             return (float)Math.Sqrt((a.Position_X - b.Position_X) * (a.Position_X - b.Position_X) + (a.Position_Y - b.Position_Y) * (a.Position_Y - b.Position_Y));
         }
 
-        public override void HandleCollision(IBall a, IBall b)
+        public override void HandleCollision(LogicBall a, LogicBall b)
         {
             float Vx1, Vy1, Vx2, Vy2;
 
@@ -150,17 +156,17 @@ namespace Logic
 
         private void Check()
         {
-            for (int i = 0; i < GetRepositroyListSize(); i++)
+            for (int i = 0; i < LogicBalls.Count; i++)
             {
-                lock (GetBallRepositoryList()[i])
+                lock (LogicBalls[i])
                 {
-                    for (int j = i + 1; j < GetRepositroyListSize(); j++)
+                    for (int j = i + 1; j < LogicBalls.Count; j++)
                     {
-                        lock (GetBallRepositoryList()[j])
+                        lock (LogicBalls[j])
                         {
-                            if (CalcDistance(GetBallRepositoryList()[i], GetBallRepositoryList()[j]) <= 2 * GetBallRepositoryList()[i].Radius)
+                            if (CalcDistance(LogicBalls[i], LogicBalls[j]) <= 2 * LogicBalls[i].Radius)
                             {
-                                HandleCollision(GetBallRepositoryList()[i], GetBallRepositoryList()[j]);
+                                HandleCollision(LogicBalls[i], LogicBalls[j]);
                             }
                         }
                     }
@@ -171,9 +177,6 @@ namespace Logic
         public override void StopBallsMovement()
         {
             flag = true;
-            Console.WriteLine(GetRepositroyListSize());
-
         }
-    
     }
 }
