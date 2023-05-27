@@ -21,11 +21,11 @@ namespace Logic
 
         public Logger(string filename)
         {
-            this.buffer = new StringBuilder();
-            this.Filename = filename;
-            this.buffer.AppendLine("{\n \"collisions\":[\n");
-            this.batchFirst = true;
-            this.firstEver = true;
+            buffer = new StringBuilder();
+            this.filename = filename;
+            buffer.AppendLine("{\n \"collisions\":[\n");
+            batchFirst = true;
+            firstEver = true;
         }
 
         public override void LogCollision(ILogicBall a, ILogicBall b)
@@ -60,7 +60,7 @@ namespace Logic
             batchFirst = true;
         }
 
-        public void Finish()
+        public override void Finish()
         {
             File.AppendAllText(filename, "\n]}");
         }

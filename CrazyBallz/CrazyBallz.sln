@@ -19,11 +19,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98E9845A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTests", "Tests\DataTests\DataTests.csproj", "{142801F3-A169-408A-835F-00B9DCC5E8E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VielModelTests", "Tests\VielModelTests\VielModelTests.csproj", "{D01B62F5-F0EE-4824-8FFD-F0B41B6CE7C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VielModelTests", "Tests\VielModelTests\VielModelTests.csproj", "{D01B62F5-F0EE-4824-8FFD-F0B41B6CE7C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTests", "Tests\ModelTests\ModelTests.csproj", "{CB979582-0819-4899-8B85-E9552535EEA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelTests", "Tests\ModelTests\ModelTests.csproj", "{CB979582-0819-4899-8B85-E9552535EEA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTests", "Tests\LogicTests\LogicTests.csproj", "{B6AB7ED9-282F-4B8C-A358-4544C06F3284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicTests", "Tests\LogicTests\LogicTests.csproj", "{B6AB7ED9-282F-4B8C-A358-4544C06F3284}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{2D129D86-F730-4BA5-B2C7-001FC6771297}"
+	ProjectSection(SolutionItems) = preProject
+		logs.json = logs.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

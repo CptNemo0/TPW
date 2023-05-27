@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Logic
 {
@@ -15,7 +16,7 @@ namespace Logic
         private readonly int boardHeight;
         private bool flag = false;
         private List<ILogicBall> logicBalls = new();
-        private LoggingApi jsonLogger;
+        private LoggingApi? jsonLogger;
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
@@ -31,7 +32,6 @@ namespace Logic
             boardWidth = width;
             boardHeight = height;
             Repository = DataApi.Instantiate();
-            jsonLogger = LoggingApi.Instatiate(solutiondir + "\\" + ProjectBName + "\\Mock\\myDoc.html");
         }
 
         public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
@@ -99,6 +99,8 @@ namespace Logic
 
         public override async void StartLogging()
         {
+            string date = DateTime.Now.ToString("hh_mm_ss-dd_MM_yyyy");
+            jsonLogger = LoggingApi.Instatiate("..\\..\\..\\..\\logs" + date + ".json");
             while (true)
             {
                 await Task.Run(() => { JsonLogger.Write(); Thread.Sleep(1000);});
