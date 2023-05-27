@@ -5,12 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace Logic
 {
-    public class LogicBall : INotifyPropertyChanged
+    internal class LogicBall : ILogicBall, INotifyPropertyChanged
     {
         private readonly IBall ball;
-        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public float Position_X
+        public override float Position_X
         {
             get
             {
@@ -28,7 +27,7 @@ namespace Logic
                 NotifyPropertyChanged();
             }
         }
-        public float Position_Y
+        public override float Position_Y
         {
             get
             {
@@ -46,11 +45,11 @@ namespace Logic
                 NotifyPropertyChanged();
             }
         }
-        public int Radius
+        public override int Radius
         {
             get => ball.Radius;
         }
-        public float Speed_X
+        public override float Speed_X
         {
             get
             {
@@ -68,7 +67,7 @@ namespace Logic
                 NotifyPropertyChanged();
             }
         }
-        public float Speed_Y
+        public override float Speed_Y
         {
             get
             {
@@ -86,29 +85,30 @@ namespace Logic
                 NotifyPropertyChanged();
             }
         }
-        public Vector2 BoardSize { get => ball.BoardSize; set => ball.BoardSize = value; }
-        public int Mass
+        public override Vector2 BoardSize { get => ball.BoardSize; set => ball.BoardSize = value; }
+        public override int Mass
         {
             get => ball.Mass;
             set { ball.Mass = value; }
         }
+        public override event PropertyChangedEventHandler? PropertyChanged;
 
         public LogicBall(IBall ball)
         {
             this.ball = ball;
         }
 
-        public void ChangeXdirection()
+        public override void ChangeXdirection()
         {
             Speed_X *= -1;
         }
 
-        public void ChangeYdirection()
+        public override void ChangeYdirection()
         {
             Speed_Y *= -1;
         }
 
-        public void Move()
+        public override void Move()
         {
             float boardWidth = BoardSize[0];
             float boardHeight = BoardSize[1];
@@ -125,7 +125,7 @@ namespace Logic
             Position_Y += Speed_Y;
         }
 
-        public void SetBoundries(Vector2 vector)
+        public override void SetBoundries(Vector2 vector)
         {
             BoardSize = vector;
         }
