@@ -9,7 +9,7 @@ namespace Logic
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
 
-        public abstract List<LogicBall> LogicBalls { get; set; }
+        public abstract List<ILogicBall> LogicBalls { get; set; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
         {
@@ -30,8 +30,8 @@ namespace Logic
 
         public abstract void StopBallsMovement();
 
-        public abstract float CalcDistance(LogicBall a, LogicBall b);
+        public abstract float CalcDistance(ILogicBall a, ILogicBall b);
 
-        public abstract void HandleCollision(LogicBall a, LogicBall b);
+        public abstract void HandleCollision(ILogicBall a, ILogicBall b);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Logic
         private readonly int boardWidth;
         private readonly int boardHeight;
         private bool flag = false;
-        private List<LogicBall> logicBalls = new();
+        private List<ILogicBall> logicBalls = new();
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
@@ -20,7 +21,7 @@ namespace Logic
 
         public override int BoardHeight => boardHeight;
 
-        public override List<LogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
+        public override List<ILogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
 
         public BallManager(int width, int height)
         {
@@ -41,16 +42,16 @@ namespace Logic
             }
 
             IBall ball = IBall.CreateBall(x, y, radius, xSpeed, ySpeed, mass);
-            LogicBall logicBall = new LogicBall(ball);
+            ILogicBall logicBall = ILogicBall.Instantiate(ball);
             bool addable = true;
-            foreach (LogicBall LogicBallFromList in LogicBalls)
+            foreach (ILogicBall LogicBallFromList in LogicBalls)
             {
                 if (CalcDistance(logicBall, LogicBallFromList) <= radius * 2) { addable = false; break; }
             }
             if (addable)
             {
                 Repository.AddBall(ball);
-                LogicBalls.Add(new LogicBall(ball));
+                LogicBalls.Add(logicBall);
             }
             return addable;
         }
@@ -65,10 +66,7 @@ namespace Logic
             int xSpeed = r.Next(0, 6);
             int ySpeed = r.Next(0, 6);
             int mass = r.Next(1, 11);
-            if (ySpeed == 3 && xSpeed == 3)
-            {
-                ySpeed++;
-            }
+
             return CreateBall(
                 r.Next(radius, boardWidth - radius),
                 r.Next(radius, boardHeight - radius),
@@ -99,7 +97,7 @@ namespace Logic
         {
             flag = false;
             Vector2 vector = new Vector2(boardWidth, boardHeight);
-            foreach (LogicBall ball in LogicBalls)
+            foreach (ILogicBall ball in LogicBalls)
             {
                 ball.SetBoundries(vector);
             }
@@ -118,7 +116,7 @@ namespace Logic
         private async void MoveTasks()
         {
             Vector2 vector = new Vector2(boardWidth, boardHeight);
-            foreach (LogicBall ball in LogicBalls)
+            foreach (ILogicBall ball in LogicBalls)
             {
                 await Task.Run(() =>
                 {
@@ -127,12 +125,12 @@ namespace Logic
             }
         }
 
-        public override float CalcDistance(LogicBall a, LogicBall b)
+        public override float CalcDistance(ILogicBall a, ILogicBall b)
         {
             return (float)Math.Sqrt((a.Position_X - b.Position_X) * (a.Position_X - b.Position_X) + (a.Position_Y - b.Position_Y) * (a.Position_Y - b.Position_Y));
         }
 
-        public override void HandleCollision(LogicBall a, LogicBall b)
+        public override void HandleCollision(ILogicBall a, ILogicBall b)
         {
             float Vx1, Vy1, Vx2, Vy2;
 
