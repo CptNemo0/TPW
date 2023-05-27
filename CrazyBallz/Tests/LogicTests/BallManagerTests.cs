@@ -112,8 +112,8 @@
         {
             IBall a_ball = IBall.CreateBall(10, 15, 5, 2, 4, 1);
             IBall b_ball = IBall.CreateBall(30, 35, 5, -3, -2, 1);
-            LogicBall a = new LogicBall(a_ball);
-            LogicBall b = new LogicBall(b_ball);
+            ILogicBall a = ILogicBall.Instantiate(a_ball);
+            ILogicBall b = ILogicBall.Instantiate(b_ball);
             float Vx1, Vy1, Vx2, Vy2;
             Vx1 = (a.Mass * a.Speed_X + b.Mass * b.Speed_X - b.Mass * (a.Speed_X - b.Speed_X)) / (a.Mass + b.Mass);
             Vy1 = (a.Mass * a.Speed_Y + b.Mass * b.Speed_Y - b.Mass * (a.Speed_Y - b.Speed_Y)) / (a.Mass + b.Mass);
