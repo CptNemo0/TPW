@@ -5,6 +5,7 @@ using System.IO;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Logic
 {
@@ -14,7 +15,7 @@ namespace Logic
         private readonly int boardHeight;
         private bool flag = false;
         private List<ILogicBall> logicBalls = new();
-        private Logger jsonLogger;
+        private LoggingApi jsonLogger;
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
@@ -23,14 +24,14 @@ namespace Logic
         public override int BoardHeight => boardHeight;
 
         public override List<ILogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
-        public override Logger JsonLogger { get => jsonLogger; }
+        public override LoggingApi JsonLogger { get => jsonLogger; }
 
         public BallManager(int width, int height)
         {
             boardWidth = width;
             boardHeight = height;
             Repository = DataApi.Instantiate();
-            jsonLogger = new Logger("C:\\Users\\pawel\\Desktop\\Studia\\wspolbiezne\\etapy\\TPW\\CrazyBallz\\Logic\\logs.json");
+            jsonLogger = LoggingApi.Instatiate(solutiondir + "\\" + ProjectBName + "\\Mock\\myDoc.html");
         }
 
         public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)

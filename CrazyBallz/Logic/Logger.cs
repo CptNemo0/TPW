@@ -10,20 +10,20 @@ using System.IO;
 
 namespace Logic
 {
-    public class Logger
+    internal class Logger : LoggingApi
     {
         private string filename;
-        private StringBuilder buffer; 
+        private StringBuilder buffer;
 
-        public string Filename { get => filename; set => filename = value; }
+        public override string Filename { get => filename; set => filename = value; }
 
         public Logger(string filename)
         {
-            this.buffer = new StringBuilder();
-            this.Filename = filename;
+            buffer = new StringBuilder();
+            Filename = filename;
         }
 
-        public void LogCollision(ILogicBall a, ILogicBall b)
+        public override void LogCollision(ILogicBall a, ILogicBall b)
         {
             var collision = new
             {
@@ -35,7 +35,7 @@ namespace Logic
             buffer.Append(JsonConvert.SerializeObject(collision));
         }
 
-        public void Write()
+        public override void Write()
         {
             File.AppendAllText(filename, buffer.ToString() + Environment.NewLine);
             buffer = new StringBuilder();
