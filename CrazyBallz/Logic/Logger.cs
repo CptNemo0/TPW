@@ -13,7 +13,9 @@ namespace Logic
     public class Logger
     {
         private string filename;
-        private StringBuilder buffer; 
+        private StringBuilder buffer;
+        private bool batchFirst;
+        private bool firstEver;
 
         public string Filename { get => filename; set => filename = value; }
 
@@ -21,6 +23,9 @@ namespace Logic
         {
             this.buffer = new StringBuilder();
             this.Filename = filename;
+            this.buffer.AppendLine("{\n \"collisions\":[\n");
+            this.batchFirst = true;
+            this.firstEver = true;
         }
 
         public void LogCollision(ILogicBall a, ILogicBall b)
@@ -29,16 +34,35 @@ namespace Logic
             {
                 x_collision = (int)((a.Position_X + b.Position_X) / 2),
                 y_collision = (int)((a.Position_Y + b.Position_Y) / 2),
-                date = DateTime.Now.ToString("hh-mm-ss-dd-MM-yyyy"),
+                date = DateTime.Now.ToString("hh:mm:ss | dd-MM-yyyy"),
             };
-
-            buffer.Append(JsonConvert.SerializeObject(collision));
+            if(firstEver && batchFirst)
+            {
+                buffer.Append(JsonConvert.SerializeObject(collision));
+                batchFirst = false;
+                firstEver = false;
+            }
+            else if (batchFirst && !firstEver)
+            {
+                buffer.Append(",\n" + JsonConvert.SerializeObject(collision));
+                batchFirst = false;
+            }
+            else
+            {
+                buffer.Append(",\n" + JsonConvert.SerializeObject(collision));
+            }
         }
 
         public void Write()
         {
-            File.AppendAllText(filename, buffer.ToString() + Environment.NewLine);
+            File.AppendAllText(filename, buffer.ToString());
             buffer = new StringBuilder();
+            batchFirst = true;
+        }
+
+        public void Finish()
+        {
+            File.AppendAllText(filename, "\n]}");
         }
     }
 }
