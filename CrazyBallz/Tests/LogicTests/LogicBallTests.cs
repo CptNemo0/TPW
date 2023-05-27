@@ -6,8 +6,8 @@ namespace LogicTests
     {
         IBall ball1;
         IBall ball2;
-        LogicBall logicBall1;
-        LogicBall logicBall2;
+        ILogicBall logicBall1;
+        ILogicBall logicBall2;
 
         [SetUp]
         public void Setup()
@@ -15,8 +15,8 @@ namespace LogicTests
             ball1 = IBall.CreateBall(5, 5, 5, 1, 1, 1);
             ball2 = IBall.CreateBall(390, 390, 10, 3, 3, 3);
             Vector2 vector = new Vector2(400, 400);
-            logicBall1 = new LogicBall(ball1);
-            logicBall2 = new LogicBall(ball2);
+            logicBall1 = ILogicBall.Instantiate(ball1);
+            logicBall2 = ILogicBall.Instantiate(ball2);
             logicBall1.SetBoundries(vector);
             logicBall2.SetBoundries(vector);
         }
