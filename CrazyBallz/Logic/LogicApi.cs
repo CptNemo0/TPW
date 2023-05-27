@@ -8,7 +8,8 @@ namespace Logic
         public abstract DataApi Repository { get; set; }
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
-
+        
+        public abstract Logger JsonLogger { get; }
         public abstract List<ILogicBall> LogicBalls { get; set; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)
@@ -30,6 +31,7 @@ namespace Logic
 
         public abstract void StopBallsMovement();
 
+        public abstract void StartLogging();
         public abstract float CalcDistance(ILogicBall a, ILogicBall b);
 
         public abstract void HandleCollision(ILogicBall a, ILogicBall b);

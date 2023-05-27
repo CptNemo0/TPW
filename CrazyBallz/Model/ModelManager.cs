@@ -51,6 +51,7 @@ namespace Model
 
         public override void StartBallsMovement()
         {
+            logicApi.StartLogging();
             logicApi.StartBallsMovement();
         }
 

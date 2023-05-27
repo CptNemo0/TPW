@@ -13,7 +13,7 @@ namespace Logic
         private readonly int boardWidth;
         private readonly int boardHeight;
         private bool flag = false;
-        private List<LogicBall> logicBalls = new();
+        private List<ILogicBall> logicBalls = new();
         private Logger jsonLogger;
 
         public override DataApi Repository { get; set; } = new BallRepository();
@@ -23,13 +23,14 @@ namespace Logic
         public override int BoardHeight => boardHeight;
 
         public override List<ILogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
+        public override Logger JsonLogger { get => jsonLogger; }
 
         public BallManager(int width, int height)
         {
             boardWidth = width;
             boardHeight = height;
             Repository = DataApi.Instantiate();
-
+            jsonLogger = new Logger("C:\\Users\\pawel\\Desktop\\Studia\\wspolbiezne\\etapy\\TPW\\CrazyBallz\\Logic\\logs.json");
         }
 
         public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
@@ -93,6 +94,19 @@ namespace Logic
         public override int GetRepositroyListSize()
         {
             return Repository.GetAmountOfBalls();
+        }
+
+        public override async void StartLogging()
+        {
+            while (true)
+            {
+                await Task.Run(() => { JsonLogger.Write(); Thread.Sleep(1000);});
+                
+                if (flag)
+                {
+                    break;
+                }
+            }
         }
 
         public override async void StartBallsMovement()
@@ -166,7 +180,7 @@ namespace Logic
                         {
                             if (CalcDistance(LogicBalls[i], LogicBalls[j]) <= 2 * LogicBalls[i].Radius)
                             {
-                                log
+                                JsonLogger.LogCollision(LogicBalls[i], LogicBalls[j]);
                                 HandleCollision(LogicBalls[i], LogicBalls[j]);
                             }
                         }
@@ -175,6 +189,7 @@ namespace Logic
 
             }
         }
+
         public override void StopBallsMovement()
         {
             flag = true;

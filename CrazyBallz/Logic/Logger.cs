@@ -23,13 +23,13 @@ namespace Logic
             this.Filename = filename;
         }
 
-        public void LogCollision(IBall a, IBall b)
+        public void LogCollision(ILogicBall a, ILogicBall b)
         {
             var collision = new
             {
                 x_collision = (int)((a.Position_X + b.Position_X) / 2),
                 y_collision = (int)((a.Position_Y + b.Position_Y) / 2),
-                date = DateTime.Now.ToString("dd-MM-yyyy"),
+                date = DateTime.Now.ToString("hh-mm-ss-dd-MM-yyyy"),
             };
 
             buffer.Append(JsonConvert.SerializeObject(collision));
