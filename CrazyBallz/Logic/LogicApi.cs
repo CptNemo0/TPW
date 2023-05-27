@@ -8,7 +8,7 @@ namespace Logic
         public abstract DataApi Repository { get; set; }
         public abstract int BoardWitdth { get; }
         public abstract int BoardHeight { get; }
-
+        public abstract Logger JsonLogger { get; set; }
         public abstract List<LogicBall> LogicBalls { get; set; }
 
         public static LogicApi Instantiate(int boardHeight, int boardWidth)

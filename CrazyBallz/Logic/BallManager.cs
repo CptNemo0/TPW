@@ -13,6 +13,7 @@ namespace Logic
         private readonly int boardHeight;
         private bool flag = false;
         private List<LogicBall> logicBalls = new();
+        private Logger jsonLogger;
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
@@ -21,12 +22,14 @@ namespace Logic
         public override int BoardHeight => boardHeight;
 
         public override List<LogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
+        public override Logger JsonLogger { get => jsonLogger; set => jsonLogger = value; }
 
         public BallManager(int width, int height)
         {
             boardWidth = width;
             boardHeight = height;
             Repository = DataApi.Instantiate();
+
         }
 
         public override bool CreateBall(int x, int y, int radius, int xSpeed, int ySpeed, int mass)
@@ -166,6 +169,7 @@ namespace Logic
                         {
                             if (CalcDistance(LogicBalls[i], LogicBalls[j]) <= 2 * LogicBalls[i].Radius)
                             {
+                                log
                                 HandleCollision(LogicBalls[i], LogicBalls[j]);
                             }
                         }
