@@ -194,6 +194,7 @@ namespace Logic
         public override void StopBallsMovement()
         {
             flag = true;
+            JsonLogger.Finish();
         }
     }
 }
