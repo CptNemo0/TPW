@@ -99,7 +99,7 @@ namespace Logic
         public override async void StartLogging()
         {
             string date = DateTime.Now.ToString("hh_mm_ss-dd_MM_yyyy");
-            jsonLogger = LoggingApi.Instatiate("..\\..\\..\\..\\logs" + date + ".json");
+            jsonLogger = LoggingApi.Instatiate("..\\..\\..\\..\\logs\\log" + date + ".json");
             logTimer = new Timer(JsonLogger.Write, null, 0, 1000);
         }
 
