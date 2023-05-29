@@ -53,7 +53,7 @@ namespace Logic
             }
         }
 
-        public override void Write()
+        public override void Write(object? state)
         {
             File.AppendAllText(filename, buffer.ToString());
             buffer = new StringBuilder();

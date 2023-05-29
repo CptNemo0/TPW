@@ -24,7 +24,7 @@ namespace Logic
             return new Logger(filename);
         }
         public abstract void LogCollision(ILogicBall a, ILogicBall b);
-        public abstract void Write();
+        public abstract void Write(object? state);
         public abstract void Finish();
     }
 }

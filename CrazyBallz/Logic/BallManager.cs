@@ -17,6 +17,7 @@ namespace Logic
         private bool flag = false;
         private List<ILogicBall> logicBalls = new();
         private LoggingApi? jsonLogger;
+        private Timer logTimer;
 
         public override DataApi Repository { get; set; } = new BallRepository();
 
@@ -26,6 +27,7 @@ namespace Logic
 
         public override List<ILogicBall> LogicBalls { get => logicBalls; set => logicBalls = value; }
         public override LoggingApi JsonLogger { get => jsonLogger; }
+        public Timer LogTimer { get => logTimer; set => logTimer = value; }
 
         public BallManager(int width, int height)
         {
@@ -101,15 +103,7 @@ namespace Logic
         {
             string date = DateTime.Now.ToString("hh_mm_ss-dd_MM_yyyy");
             jsonLogger = LoggingApi.Instatiate("..\\..\\..\\..\\logs" + date + ".json");
-            while (true)
-            {
-                await Task.Run(() => { JsonLogger.Write(); Thread.Sleep(1000);});
-                
-                if (flag)
-                {
-                    break;
-                }
-            }
+            logTimer = new Timer(JsonLogger.Write, null, 0, 1000);
         }
 
         public override async void StartBallsMovement()
@@ -197,6 +191,7 @@ namespace Logic
         {
             flag = true;
             JsonLogger.Finish();
+            logTimer.Dispose();
         }
     }
 }

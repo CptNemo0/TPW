@@ -26,9 +26,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicTests", "Tests\LogicTests\LogicTests.csproj", "{B6AB7ED9-282F-4B8C-A358-4544C06F3284}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{2D129D86-F730-4BA5-B2C7-001FC6771297}"
-	ProjectSection(SolutionItems) = preProject
-		logs.json = logs.json
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
